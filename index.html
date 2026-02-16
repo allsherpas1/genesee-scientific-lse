@@ -194,6 +194,118 @@
             color: #854d0e;
         }
 
+        .event-details {
+            background: linear-gradient(to right, #e8f5e9, #f0f8ff);
+            border-left: 4px solid #8dc63f;
+            padding: 20px;
+            margin: 20px 0 30px 0;
+            border-radius: 4px;
+        }
+
+        .event-details h3 {
+            color: #003d6b;
+            font-size: 16px;
+            margin: 0 0 10px 0;
+        }
+
+        .event-details-intro {
+            color: #475569;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #003d6b;
+            font-weight: 600;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #8dc63f;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: 'Open Sans', Arial, sans-serif;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #003d6b;
+            box-shadow: 0 0 0 3px rgba(141, 198, 63, 0.2);
+        }
+
+        .generated-values {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            border: 1px solid #8dc63f;
+        }
+
+        .generated-values h4 {
+            color: #003d6b;
+            font-size: 14px;
+            margin: 0 0 12px 0;
+            font-weight: 600;
+        }
+
+        .copy-field {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .copy-field label {
+            color: #64748b;
+            font-size: 13px;
+            min-width: 150px;
+            font-weight: 600;
+        }
+
+        .copy-field-value {
+            flex: 1;
+            background: #f8fafc;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #003d6b;
+            border: 1px solid #e2e8f0;
+        }
+
+        .copy-button {
+            background: #8dc63f;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+
+        .copy-button:hover {
+            background: #7ab82f;
+        }
+
+        .copy-button:active {
+            transform: scale(0.95);
+        }
+
+        .copy-button.copied {
+            background: #003d6b;
+        }
+
         .info-box {
             background: #e3f2fd;
             border-left: 4px solid #2196f3;
@@ -280,6 +392,78 @@
             font-weight: 600;
             margin-bottom: 15px;
             border-left: 4px solid #8dc63f;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .phase-header:hover {
+            background: linear-gradient(135deg, #004d87 0%, #0066b2 100%);
+        }
+
+        .phase-arrow {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .phase-arrow.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .phase-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .phase-content.collapsed {
+            max-height: 0;
+        }
+
+        .collapsible-section-header {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 12px 15px;
+            margin-top: 15px;
+            margin-bottom: 0;
+            border-radius: 4px 4px 0 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .collapsible-section-header:hover {
+            background: #d1e7fd;
+        }
+
+        .collapsible-section-header strong {
+            color: #01579b;
+            font-size: 15px;
+        }
+
+        .collapsible-arrow {
+            font-size: 16px;
+            color: #01579b;
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-arrow.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .collapsible-content {
+            max-height: 3000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .collapsible-content.collapsed {
+            max-height: 0;
+            padding: 0;
         }
 
         .step {
@@ -344,6 +528,40 @@
         .step-text em {
             font-style: italic;
             color: #64748b;
+        }
+
+        .inline-copy-value {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f4ff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            border: 1px solid #8dc63f;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #003d6b;
+            font-style: normal;
+        }
+
+        .inline-copy-button {
+            background: #8dc63f;
+            color: white;
+            border: none;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .inline-copy-button:hover {
+            background: #7ab82f;
+        }
+
+        .inline-copy-button.copied {
+            background: #003d6b;
         }
 
         .guardrails {
@@ -435,39 +653,77 @@
             </p>
             
             <div style="margin-top: 20px; padding-top: 15px; border-top: 2px solid #0066b2;">
-                <h3>Master Workflow Reference</h3>
-                <div style="display: flex; flex-direction: column; gap: 8px;">
-                    <div>
-                        <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer">
-                            [TS] - 1 - Set Event Key + Populate Email Fields ↗
-                        </a>
-                    </div>
-                    <div>
-                        <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561834190/edit" target="_blank" rel="noopener noreferrer">
-                            [TS] - 2 - Send Pre-Show Emails ↗
-                        </a>
-                    </div>
-                    <div>
-                        <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer">
-                            [TS] - 3 - Post-Show Processing ↗
-                        </a>
-                    </div>
-                    <div>
-                        <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3708457664/edit" target="_blank" rel="noopener noreferrer">
-                            [TS] - 4 - Send Post-Show Emails ↗
-                        </a>
+                <div class="collapsible-section-header" onclick="toggleCollapsible('workflow-ref')" style="margin-top: 0; border-radius: 4px;">
+                    <h3 style="color: #003d6b; font-size: 16px; margin: 0;">Master Workflow Reference</h3>
+                    <span class="collapsible-arrow collapsed" id="collapsible-arrow-workflow-ref">▼</span>
+                </div>
+                <div class="collapsible-content collapsed" id="collapsible-content-workflow-ref" style="background: white; border-radius: 0 0 4px 4px;">
+                    <div style="display: flex; flex-direction: column; gap: 8px; padding: 15px;">
+                        <div>
+                            <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer">
+                                [TS] - 1 - Set Event Key + Populate Email Fields ↗
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561834190/edit" target="_blank" rel="noopener noreferrer">
+                                [TS] - 2 - Send Pre-Show Emails ↗
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer">
+                                [TS] - 3 - Post-Show Processing ↗
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3708457664/edit" target="_blank" rel="noopener noreferrer">
+                                [TS] - 4 - Send Post-Show Emails ↗
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="naming-convention">
-            <strong>Naming Convention:</strong> LSE | YYYY-MM-DD | Institution – Location
+        <div class="event-details">
+            <h3>📋 Generate Values</h3>
+            <p class="event-details-intro">Fill in these details and click Generate to create your Event Key and Campaign Name. You can then copy the values into Salesforce and HubSpot where appropriate.</p>
+            
+            <div class="input-group">
+                <label for="eventInstitution">Event Institution</label>
+                <input type="text" id="eventInstitution" placeholder="e.g., Washington University – St. Louis">
+            </div>
+
+            <div class="input-group">
+                <label for="eventDate">Event Date</label>
+                <input type="date" id="eventDate">
+            </div>
+
+            <button class="reset-button" style="margin-top: 10px; width: auto;" onclick="generateValues()">Generate</button>
+
+            <div class="generated-values" id="generatedValuesSection" style="display: none;">
+                <h4>Generated Values (click to copy):</h4>
+                
+                <div class="copy-field">
+                    <label>Event Key:</label>
+                    <div class="copy-field-value" id="displayEventKey">-</div>
+                    <button class="copy-button" onclick="copyToClipboard('displayEventKey', this)">Copy</button>
+                </div>
+
+                <div class="copy-field">
+                    <label>Campaign Name:</label>
+                    <div class="copy-field-value" id="displayCampaignName">-</div>
+                    <button class="copy-button" onclick="copyToClipboard('displayCampaignName', this)">Copy</button>
+                </div>
+            </div>
         </div>
 
         <!-- Phase 1 -->
         <div class="phase">
-            <div class="phase-header">Phase 1: Pre-Show Setup</div>
+            <div class="phase-header" onclick="togglePhase(1)">
+                <span>Phase 1: Pre-Show Setup</span>
+                <span class="phase-arrow" id="phase-arrow-1">▼</span>
+            </div>
+            <div class="phase-content" id="phase-content-1">
             
             <div class="step" data-step="1">
                 <div class="checkbox-wrapper">
@@ -476,7 +732,7 @@
                 <div class="step-content">
                     <label for="step1">
                         <span class="step-number">Step 1</span>
-                        <span class="step-text">Find the <strong>Master Account Code</strong> in Salesforce using the Master Account Report.</span>
+                        <span class="step-text">Create the <strong>Salesforce Campaign</strong> using the naming convention <span id="step1-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>.</span>
                     </label>
                 </div>
             </div>
@@ -488,7 +744,7 @@
                 <div class="step-content">
                     <label for="step2">
                         <span class="step-number">Step 2</span>
-                        <span class="step-text">Create the <strong>Salesforce Campaign</strong> using the naming convention: <em>LSE | YYYY-MM-DD | Institution – Location</em>. Include the <strong>Asset Key</strong> and <strong>Master Account Code</strong>.</span>
+                        <span class="step-text">Find the <strong>Master Account Code</strong> in Salesforce using the <a href="https://geneseesci.lightning.force.com/lightning/r/Report/00Ocv00000WTGS3EAP/view?queryScope=userFolders" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Master Account Report</a>.</span>
                     </label>
                 </div>
             </div>
@@ -500,15 +756,20 @@
                 <div class="step-content">
                     <label for="step3">
                         <span class="step-number">Step 3</span>
-                        <span class="step-text">In HubSpot, clone the <strong>LSE Pre-Show List – TEMPLATE</strong> segment, rename it using the naming convention, update the filter with the <strong>Master Account Code</strong>, and create a matching campaign.</span>
+                        <span class="step-text">In HubSpot, <a href="https://app-na2.hubspot.com/contacts/242844030/objectLists/177/filters" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">clone the LSE Pre-Show List – TEMPLATE segment here</a>. Change the filter to the <strong>Master Account Code</strong> you found in Salesforce.</span>
                     </label>
                 </div>
+            </div>
             </div>
         </div>
 
         <!-- Phase 2 -->
         <div class="phase">
-            <div class="phase-header">Phase 2: Event Configuration</div>
+            <div class="phase-header" onclick="togglePhase(2)">
+                <span>Phase 2: Event Configuration</span>
+                <span class="phase-arrow" id="phase-arrow-2">▼</span>
+            </div>
+            <div class="phase-content" id="phase-content-2">
             
             <div class="step" data-step="4">
                 <div class="checkbox-wrapper">
@@ -517,7 +778,7 @@
                 <div class="step-content">
                     <label for="step4">
                         <span class="step-number">Step 4</span>
-                        <span class="step-text">Create the <strong>Trade Show record</strong> in HubSpot using the same naming convention. Associate it with the correct <strong>Salesforce Campaign</strong> and assign the correct <strong>Sales Rep (Owner)</strong>.</span>
+                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details.</span>
                     </label>
                 </div>
             </div>
@@ -527,7 +788,11 @@
                 If any of the event information hasn't been announced yet and the first email needs to send, leave the values blank and nothing will appear. If you'd like to put in a statement to that fact, edit the "Time" field on the event record and say "Final event details are coming soon." The rest of the fields will stay blank.
                 
                 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #90caf9;">
-                    <strong style="margin-bottom: 12px;">When Event Information Becomes Available:</strong>
+                    <div class="collapsible-section-header" onclick="toggleCollapsible('event-info')">
+                        <strong>When Event Information Becomes Available:</strong>
+                        <span class="collapsible-arrow" id="collapsible-arrow-event-info">▼</span>
+                    </div>
+                    <div class="collapsible-content" id="collapsible-content-event-info">
                     
                     <div class="info-step">
                         <div class="info-checkbox">
@@ -545,7 +810,7 @@
                         </div>
                         <div class="info-step-content">
                             <span class="info-step-number">Step 2</span>
-                            <span class="info-step-text">Go to the workflow <strong>'[TS] – 1 – Set Event Key + Populate Email Fields'</strong></span>
+                            <span class="info-step-text">Go to the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong></span>
                         </div>
                     </div>
 
@@ -598,6 +863,7 @@
                             <span class="info-step-text">Turn the workflow OFF after completion</span>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
 
@@ -608,15 +874,20 @@
                 <div class="step-content">
                     <label for="step5">
                         <span class="step-number">Step 5</span>
-                        <span class="step-text">Open the workflow <strong>'[TS] – 1 – Set Event Key + Populate Email Fields'</strong>. Update the segment enrollment and <strong>Event Key</strong> to match the <strong>Asset Key</strong>. Turn the workflow <strong>ON</strong> to run it, then turn it <strong>OFF</strong> after completion. This prepares contact records for email.</span>
+                        <span class="step-text">Open the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong>. Update the segment enrollment and set the <strong>Event Key</strong> to <span id="step5-event-key"></span>. Turn the workflow <strong>ON</strong> to run it, then turn it <strong>OFF</strong> after completion. This prepares contact records for email.</span>
                     </label>
                 </div>
+            </div>
             </div>
         </div>
 
         <!-- Phase 3 -->
         <div class="phase">
-            <div class="phase-header">Phase 3: Send Pre-Show Email</div>
+            <div class="phase-header" onclick="togglePhase(3)">
+                <span>Phase 3: Send Pre-Show Email</span>
+                <span class="phase-arrow" id="phase-arrow-3">▼</span>
+            </div>
+            <div class="phase-content" id="phase-content-3">
             
             <div class="step" data-step="6">
                 <div class="checkbox-wrapper">
@@ -625,15 +896,20 @@
                 <div class="step-content">
                     <label for="step6">
                         <span class="step-number">Step 6</span>
-                        <span class="step-text">Send the <strong>pre-show email</strong> to the created segment. Dynamic event and rep information will render automatically.</span>
+                        <span class="step-text"><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561834190/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Go to the pre-show email workflow</a>. Change the segment to the Master Account Code-based segment you just created.</span>
                     </label>
                 </div>
+            </div>
             </div>
         </div>
 
         <!-- Phase 4 -->
         <div class="phase">
-            <div class="phase-header">Phase 4: Post-Show Import</div>
+            <div class="phase-header" onclick="togglePhase(4)">
+                <span>Phase 4: Post-Show Import</span>
+                <span class="phase-arrow" id="phase-arrow-4">▼</span>
+            </div>
+            <div class="phase-content" id="phase-content-4">
 
             <div class="step" data-step="7">
                 <div class="checkbox-wrapper">
@@ -642,7 +918,7 @@
                 <div class="step-content">
                     <label for="step7">
                         <span class="step-number">Step 7</span>
-                        <span class="step-text"><strong>Prepare the attendee file:</strong> Rename the file using the naming convention: <em>LSE | YYYY-MM-DD | Institution – Location</em>. Save as CSV.</span>
+                        <span class="step-text"><strong>Prepare the attendee file:</strong> Rename the file using the naming convention <span id="step7-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Save as CSV.</span>
                     </label>
                 </div>
             </div>
@@ -654,7 +930,7 @@
                 <div class="step-content">
                     <label for="step8">
                         <span class="step-number">Step 8</span>
-                        <span class="step-text"><strong>Update the workflow (before import):</strong> Go to <strong>[TS] - 3 - Post-show processing</strong> workflow. Update the enrollment trigger: List membership → Contact is a member of → Select the import list for this show, AND LSE Post-Show Processed Date is unknown (Re-enrollment OFF). Then update the Salesforce Campaign action: Select the correct Salesforce Campaign, confirm Campaign Member Status, and save the workflow.</span>
+                        <span class="step-text"><strong>Update the workflow (before import):</strong> Go to <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 3 - Post-show processing</a></strong> workflow. Update the enrollment trigger: List membership → Contact is a member of → Select the import list for this show, AND LSE Post-Show Processed Date is unknown (Re-enrollment OFF). Then update the Salesforce Campaign action: Select the correct Salesforce Campaign, confirm Campaign Member Status, and save the workflow.</span>
                     </label>
                 </div>
             </div>
@@ -692,9 +968,10 @@
                 <div class="step-content">
                     <label for="step10">
                         <span class="step-number">Step 10</span>
-                        <span class="step-text"><strong>Marketing follow-up:</strong> Launch the <strong>[TS] - 4 - Send Post-Show Emails</strong> workflow from the same segment used for post-show processing. Go to the workflow, click "Enroll", choose "From a segment", select the post-show import list, click "Enroll". The workflow waits the defined number of days, checks if the contact has <strong>"Met with Sales"</strong>, and sends post-show emails only to contacts who have NOT met with sales.</span>
+                        <span class="step-text"><strong>Marketing follow-up:</strong> Launch the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3708457664/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 4 - Send Post-Show Emails</a></strong> workflow from the same segment used for post-show processing. Go to the workflow, click "Enroll", choose "From a segment", select the post-show import list, click "Enroll". The workflow waits the defined number of days, checks if the contact has <strong>"Met with Sales"</strong>, and sends post-show emails only to contacts who have NOT met with sales.</span>
                     </label>
                 </div>
+            </div>
             </div>
         </div>
 
@@ -714,8 +991,9 @@
     </div>
 
     <script>
-        // Load saved progress from localStorage
+        // Load saved progress and event details from localStorage
         window.onload = function() {
+            // Load checkboxes
             for (let i = 1; i <= 10; i++) {
                 const checkbox = document.getElementById('step' + i);
                 const saved = localStorage.getItem('step' + i);
@@ -724,8 +1002,250 @@
                     checkbox.closest('.step').classList.add('checked');
                 }
             }
+            
+            // Load event details
+            const savedEventInstitution = localStorage.getItem('eventInstitution');
+            const savedEventDate = localStorage.getItem('eventDate');
+            const savedEventKey = localStorage.getItem('eventKey');
+            const savedCampaignName = localStorage.getItem('campaignName');
+            
+            if (savedEventInstitution) document.getElementById('eventInstitution').value = savedEventInstitution;
+            if (savedEventDate) document.getElementById('eventDate').value = savedEventDate;
+            
+            // Show generated values if they exist
+            if (savedEventKey && savedCampaignName) {
+                document.getElementById('displayEventKey').textContent = savedEventKey;
+                document.getElementById('displayCampaignName').textContent = savedCampaignName;
+                document.getElementById('generatedValuesSection').style.display = 'block';
+                
+                // Update dynamic references in steps
+                updateDynamicReferences(savedEventKey, savedCampaignName);
+            }
+            
             updateProgress();
         };
+
+        // Toggle phase accordion
+        function togglePhase(phaseNumber) {
+            const content = document.getElementById('phase-content-' + phaseNumber);
+            const arrow = document.getElementById('phase-arrow-' + phaseNumber);
+            
+            content.classList.toggle('collapsed');
+            arrow.classList.toggle('collapsed');
+        }
+
+        // Toggle collapsible section
+        function toggleCollapsible(sectionId) {
+            const content = document.getElementById('collapsible-content-' + sectionId);
+            const arrow = document.getElementById('collapsible-arrow-' + sectionId);
+            
+            content.classList.toggle('collapsed');
+            arrow.classList.toggle('collapsed');
+        }
+
+        // Generate event key and campaign name
+        function generateValues() {
+            const institution = document.getElementById('eventInstitution').value;
+            const date = document.getElementById('eventDate').value;
+            
+            if (!institution || !date) {
+                alert('Please fill in both Event Institution and Event Date');
+                return;
+            }
+            
+            // Save inputs
+            localStorage.setItem('eventInstitution', institution);
+            localStorage.setItem('eventDate', date);
+            
+            // Generate Event Key (short lowercase identifier)
+            let eventKey = generateEventKey(institution);
+            
+            // Generate Campaign Name (LSE | YYYY-MM-DD | Institution)
+            let campaignName = `LSE | ${date} | ${institution}`;
+            
+            // Save generated values
+            localStorage.setItem('eventKey', eventKey);
+            localStorage.setItem('campaignName', campaignName);
+            
+            // Display generated values
+            document.getElementById('displayEventKey').textContent = eventKey;
+            document.getElementById('displayCampaignName').textContent = campaignName;
+            document.getElementById('generatedValuesSection').style.display = 'block';
+            
+            // Update all dynamic references in the steps
+            updateDynamicReferences(eventKey, campaignName);
+        }
+
+        // Update dynamic references throughout the document
+        function updateDynamicReferences(eventKey, campaignName) {
+            // Helper function to create inline copy element
+            function createInlineCopy(value, label) {
+                return `<span class="inline-copy-value">${value} <button class="inline-copy-button" onclick="copyInline(this, '${value.replace(/'/g, "\\'")}')">Copy</button></span>`;
+            }
+            
+            // Update Step 1 - Naming Convention (Salesforce Campaign)
+            const step1Naming = document.getElementById('step1-naming-convention');
+            if (campaignName) {
+                step1Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+            }
+            
+            // Update Step 4 - Naming Convention and Event Key (Trade Show Record)
+            const step4Naming = document.getElementById('step4-naming-convention');
+            if (campaignName) {
+                step4Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+            }
+            
+            // Update Step 4 - Event Key
+            const step4EventKey = document.getElementById('step4-event-key');
+            if (eventKey) {
+                step4EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
+            }
+            
+            // Update Step 5 - Event Key
+            const step5EventKey = document.getElementById('step5-event-key');
+            if (eventKey) {
+                step5EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
+            }
+            
+            // Update Step 7 - Naming Convention
+            const step7Naming = document.getElementById('step7-naming-convention');
+            if (campaignName) {
+                step7Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+            }
+        }
+
+        // Copy inline value
+        function copyInline(button, value) {
+            const textarea = document.createElement('textarea');
+            textarea.value = value;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        // Generate short event key from institution name
+        function generateEventKey(institution) {
+            if (!institution) return '';
+            
+            // Convert to lowercase and remove special characters except spaces and dashes
+            let cleaned = institution.toLowerCase().replace(/[^a-z\s-]/g, '');
+            
+            // Remove location part (after dash)
+            if (cleaned.includes(' – ') || cleaned.includes(' - ')) {
+                cleaned = cleaned.split(/\s*[-–]\s*/)[0];
+            }
+            
+            // Split into words
+            let words = cleaned.split(/\s+/).filter(w => w.length > 0);
+            
+            // Filter out common words that don't identify the institution
+            const commonWords = ['the', 'of', 'and', 'at', 'in', 'for', 'university', 'college', 'institute', 'school'];
+            let meaningfulWords = words.filter(w => !commonWords.includes(w));
+            
+            // If we filtered everything out, use the original words minus just 'university'
+            if (meaningfulWords.length === 0) {
+                meaningfulWords = words.filter(w => w !== 'university');
+            }
+            
+            // Take the most distinctive word (usually the first meaningful word)
+            // For "University of Michigan" → "michigan"
+            // For "Washington University" → "washington"
+            // For "UC Berkeley" → "uc berkeley" → "ucberkeley"
+            let key = 'lse' + meaningfulWords.join('');
+            
+            return key;
+        }
+
+        // Save event key when manually edited
+        function saveEventKey() {
+            const eventKey = document.getElementById('eventKey').value.toLowerCase();
+            localStorage.setItem('eventKey', eventKey);
+            document.getElementById('displayEventKey').textContent = eventKey || 'Enter event details above';
+        }
+
+        // Update event details display
+        function updateEventDetails() {
+            const eventInstitution = document.getElementById('eventInstitution').value;
+            const eventKey = document.getElementById('eventKey').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventLocation = document.getElementById('eventLocation').value;
+            
+            // Save to localStorage
+            localStorage.setItem('eventInstitution', eventInstitution);
+            localStorage.setItem('eventDate', eventDate);
+            localStorage.setItem('eventLocation', eventLocation);
+            
+            // Auto-generate event key if it's empty or if institution just changed
+            if (eventInstitution && !eventKey) {
+                const generated = generateEventKey(eventInstitution);
+                document.getElementById('eventKey').value = generated;
+                localStorage.setItem('eventKey', generated);
+            }
+            
+            // Format date
+            let formattedDate = 'YYYY-MM-DD';
+            if (eventDate) {
+                formattedDate = eventDate; // Already in YYYY-MM-DD format from date input
+            }
+            
+            // Update naming convention
+            let namingConvention = 'LSE | YYYY-MM-DD | Institution – Location';
+            if (eventDate || eventLocation) {
+                namingConvention = `LSE | ${formattedDate} | ${eventLocation || 'Institution – Location'}`;
+            }
+            document.getElementById('namingConvention').textContent = namingConvention;
+            
+            // Update event key display
+            const currentKey = document.getElementById('eventKey').value;
+            document.getElementById('displayEventKey').textContent = currentKey || 'Enter event details above';
+        }
+
+        // Copy to clipboard function
+        function copyToClipboard(elementId, button) {
+            const text = document.getElementById(elementId).textContent;
+            
+            // Create temporary textarea to copy from
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Change button text temporarily
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy:', err);
+            }
+            
+            document.body.removeChild(textarea);
+        }
 
         // Save progress and update UI
         function updateProgress() {
