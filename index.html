@@ -790,9 +790,9 @@
                 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #90caf9;">
                     <div class="collapsible-section-header" onclick="toggleCollapsible('event-info')">
                         <strong>When Event Information Becomes Available:</strong>
-                        <span class="collapsible-arrow" id="collapsible-arrow-event-info">▼</span>
+                        <span class="collapsible-arrow collapsed" id="collapsible-arrow-event-info">▼</span>
                     </div>
-                    <div class="collapsible-content" id="collapsible-content-event-info">
+                    <div class="collapsible-content collapsed" id="collapsible-content-event-info">
                     
                     <div class="info-step">
                         <div class="info-checkbox">
@@ -1274,13 +1274,39 @@
 
         // Reset all checkboxes
         function resetChecklist() {
-            if (confirm('Are you sure you want to reset the checklist? This will uncheck all items.')) {
+            if (confirm('Are you sure you want to reset the checklist? This will uncheck all items and clear event details.')) {
+                // Reset checkboxes
                 for (let i = 1; i <= 10; i++) {
                     const checkbox = document.getElementById('step' + i);
                     checkbox.checked = false;
                     checkbox.closest('.step').classList.remove('checked');
                     localStorage.setItem('step' + i, 'false');
                 }
+                
+                // Clear event details
+                document.getElementById('eventInstitution').value = '';
+                document.getElementById('eventDate').value = '';
+                localStorage.removeItem('eventInstitution');
+                localStorage.removeItem('eventDate');
+                localStorage.removeItem('eventKey');
+                localStorage.removeItem('campaignName');
+                
+                // Hide and reset generated values
+                document.getElementById('generatedValuesSection').style.display = 'none';
+                document.getElementById('displayEventKey').textContent = '-';
+                document.getElementById('displayCampaignName').textContent = '-';
+                
+                // Reset all dynamic references back to placeholders
+                document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+                const step4Naming = document.getElementById('step4-naming-convention');
+                if (step4Naming) step4Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+                const step4EventKey = document.getElementById('step4-event-key');
+                if (step4EventKey) step4EventKey.innerHTML = '';
+                const step5EventKey = document.getElementById('step5-event-key');
+                if (step5EventKey) step5EventKey.innerHTML = '';
+                const step7Naming = document.getElementById('step7-naming-convention');
+                if (step7Naming) step7Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+                
                 updateProgress();
             }
         }
