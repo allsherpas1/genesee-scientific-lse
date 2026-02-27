@@ -202,6 +202,63 @@
             border-radius: 4px;
         }
 
+        .event-selector {
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            border: 2px solid #8dc63f;
+        }
+
+        .event-selector h4 {
+            color: #003d6b;
+            font-size: 15px;
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .event-selector select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #8dc63f;
+            border-radius: 4px;
+            font-size: 14px;
+            font-family: 'Open Sans', Arial, sans-serif;
+            background: white;
+            cursor: pointer;
+        }
+
+        .event-selector select:focus {
+            outline: none;
+            border-color: #003d6b;
+            box-shadow: 0 0 0 3px rgba(141, 198, 63, 0.2);
+        }
+
+        .event-selector-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .event-selector-buttons button {
+            flex: 1;
+            background: #0066b2;
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        .event-selector-buttons button:hover {
+            background: #004d87;
+        }
+
+        .event-selector-buttons button.delete {
+            background: #dc2626;
+        }
+
+        .event-selector-buttons button.delete:hover {
+            background: #991b1b;
+        }
+
         .event-details h3 {
             color: #003d6b;
             font-size: 16px;
@@ -685,6 +742,17 @@
         </div>
 
         <div class="event-details">
+            <div class="event-selector">
+                <h4>📁 Load Previous Event or Start New</h4>
+                <select id="eventSelector" onchange="loadSelectedEvent()">
+                    <option value="">+ Start New Event</option>
+                </select>
+                <div class="event-selector-buttons">
+                    <button onclick="loadSelectedEvent()">Load Event</button>
+                    <button class="delete" onclick="deleteSelectedEvent()">Delete Event</button>
+                </div>
+            </div>
+
             <h3>📋 Generate Values</h3>
             <p class="event-details-intro">Fill in these details and click Generate to create your Event Key and Campaign Name. You can then copy the values into Salesforce and HubSpot where appropriate.</p>
             
@@ -896,7 +964,7 @@
                 <div class="step-content">
                     <label for="step6">
                         <span class="step-number">Step 6</span>
-                        <span class="step-text"><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561834190/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Go to the pre-show email workflow</a>. Change the segment to the Master Account Code-based segment you just created.</span>
+                        <span class="step-text"><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561834190/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Go to the pre-show email workflow</a>. Clone the workflow and call it this: <span id="step6-workflow-name"><em>[TS] - 2 - Send Pre-Show Emails - [Institution]</em></span></span>
                     </label>
                 </div>
             </div>
@@ -930,7 +998,7 @@
                 <div class="step-content">
                     <label for="step8">
                         <span class="step-number">Step 8</span>
-                        <span class="step-text"><strong>Update the workflow (before import):</strong> Go to <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 3 - Post-show processing</a></strong> workflow. Update the enrollment trigger: List membership → Contact is a member of → Select the import list for this show, AND LSE Post-Show Processed Date is unknown (Re-enrollment OFF). Then update the Salesforce Campaign action: Select the correct Salesforce Campaign, confirm Campaign Member Status, and save the workflow.</span>
+                        <span class="step-text"><strong>Upload the file:</strong> Go to Contacts → Import. Upload the CSV, map the required fields, and complete the import. On the final screen, click the "Actions" dropdown and then "Add imported contacts to a segment." Name the segment <span id="step8-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>.</span>
                     </label>
                 </div>
             </div>
@@ -942,23 +1010,9 @@
                 <div class="step-content">
                     <label for="step9">
                         <span class="step-number">Step 9</span>
-                        <span class="step-text"><strong>Import the file:</strong> Go to Contacts → Import, upload the CSV, map required fields, and complete the import. Processing begins automatically.</span>
+                        <span class="step-text"><strong>Update the workflow:</strong> Go to <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 3 - Post-show processing</a></strong> workflow and clone it, changing the name to <span id="step9-workflow-name"><em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em></span>. Update the enrollment trigger to point to the segment you just created. Then update the Salesforce Campaign action: Select the correct Salesforce Campaign, confirm Campaign Member Status, and save the workflow.</span>
                     </label>
                 </div>
-            </div>
-
-            <div class="info-box" style="margin-top: 20px;">
-                <strong>ℹ️ What Happens Automatically</strong>
-                <p>
-                    After import, the workflow will automatically: (1) Stamp LSE Post-Show Processed Date, (2) Add the contact to the selected Salesforce Campaign, (3) End. Contacts cannot re-enter once processed.
-                </p>
-            </div>
-
-            <div class="info-box" style="margin-top: 15px; background: #f0f4ff; border-left: 4px solid #5e72e4;">
-                <strong>👥 Sales Handoff</strong>
-                <p>
-                    Sales reviews the Salesforce Campaign. When a rep meets with a contact, they check the <strong>"Met with Sales"</strong> field on the Campaign Member object. This status syncs back to HubSpot.
-                </p>
             </div>
 
             <div class="step" data-step="10">
@@ -968,7 +1022,7 @@
                 <div class="step-content">
                     <label for="step10">
                         <span class="step-number">Step 10</span>
-                        <span class="step-text"><strong>Marketing follow-up:</strong> Launch the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3708457664/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 4 - Send Post-Show Emails</a></strong> workflow from the same segment used for post-show processing. Go to the workflow, click "Enroll", choose "From a segment", select the post-show import list, click "Enroll". The workflow waits the defined number of days, checks if the contact has <strong>"Met with Sales"</strong>, and sends post-show emails only to contacts who have NOT met with sales.</span>
+                        <span class="step-text"><strong>Marketing follow-up:</strong> Clone the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3708457664/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 4 - Send Post-Show Emails</a></strong> workflow and name it <span id="step10-workflow-name"><em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em></span>. In the workflow, change the Segment membership to be the post-show segment from the CSV you uploaded. The workflow waits the defined number of days.</span>
                     </label>
                 </div>
             </div>
@@ -1022,8 +1076,190 @@
                 updateDynamicReferences(savedEventKey, savedCampaignName);
             }
             
+            // Load saved events into dropdown
+            populateEventSelector();
+            
             updateProgress();
         };
+
+        // Get all saved events from localStorage
+        function getAllSavedEvents() {
+            const events = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('event_')) {
+                    const eventKey = key.replace('event_', '');
+                    try {
+                        events[eventKey] = JSON.parse(localStorage.getItem(key));
+                    } catch (e) {
+                        console.error('Error parsing event:', eventKey);
+                    }
+                }
+            }
+            return events;
+        }
+
+        // Populate the event selector dropdown
+        function populateEventSelector() {
+            const selector = document.getElementById('eventSelector');
+            const events = getAllSavedEvents();
+            
+            // Clear existing options except the first one
+            selector.innerHTML = '<option value="">+ Start New Event</option>';
+            
+            // Add saved events
+            Object.keys(events).sort().forEach(eventKey => {
+                const event = events[eventKey];
+                const option = document.createElement('option');
+                option.value = eventKey;
+                option.textContent = `${eventKey} - ${event.institution || 'Unknown'} (${event.date || 'No date'})`;
+                selector.appendChild(option);
+            });
+        }
+
+        // Save current event to localStorage
+        function saveCurrentEvent() {
+            const eventKey = localStorage.getItem('eventKey');
+            if (!eventKey) {
+                alert('Please generate an Event Key first before saving.');
+                return;
+            }
+            
+            // Gather all current state
+            const eventData = {
+                eventKey: eventKey,
+                campaignName: localStorage.getItem('campaignName'),
+                institution: localStorage.getItem('eventInstitution'),
+                date: localStorage.getItem('eventDate'),
+                checkboxes: {}
+            };
+            
+            // Save checkbox states
+            for (let i = 1; i <= 10; i++) {
+                eventData.checkboxes['step' + i] = localStorage.getItem('step' + i) === 'true';
+            }
+            
+            // Save to localStorage with event_ prefix
+            localStorage.setItem('event_' + eventKey, JSON.stringify(eventData));
+            
+            // Refresh dropdown
+            populateEventSelector();
+            
+            // Set selector to current event
+            document.getElementById('eventSelector').value = eventKey;
+            
+            alert(`Event "${eventKey}" saved successfully!`);
+        }
+
+        // Load selected event
+        function loadSelectedEvent() {
+            const selector = document.getElementById('eventSelector');
+            const eventKey = selector.value;
+            
+            if (!eventKey) {
+                // Start new event - clear everything
+                clearCurrentEvent();
+                return;
+            }
+            
+            const eventData = JSON.parse(localStorage.getItem('event_' + eventKey));
+            if (!eventData) {
+                alert('Event not found.');
+                return;
+            }
+            
+            // Load event details
+            document.getElementById('eventInstitution').value = eventData.institution || '';
+            document.getElementById('eventDate').value = eventData.date || '';
+            
+            localStorage.setItem('eventInstitution', eventData.institution || '');
+            localStorage.setItem('eventDate', eventData.date || '');
+            localStorage.setItem('eventKey', eventData.eventKey);
+            localStorage.setItem('campaignName', eventData.campaignName);
+            
+            // Show generated values
+            document.getElementById('displayEventKey').textContent = eventData.eventKey;
+            document.getElementById('displayCampaignName').textContent = eventData.campaignName;
+            document.getElementById('generatedValuesSection').style.display = 'block';
+            
+            // Update dynamic references
+            updateDynamicReferences(eventData.eventKey, eventData.campaignName);
+            
+            // Load checkbox states
+            for (let i = 1; i <= 10; i++) {
+                const checkbox = document.getElementById('step' + i);
+                const isChecked = eventData.checkboxes['step' + i] || false;
+                checkbox.checked = isChecked;
+                localStorage.setItem('step' + i, isChecked);
+                if (isChecked) {
+                    checkbox.closest('.step').classList.add('checked');
+                } else {
+                    checkbox.closest('.step').classList.remove('checked');
+                }
+            }
+            
+            updateProgress();
+            
+            alert(`Event "${eventKey}" loaded successfully!`);
+        }
+
+        // Delete selected event
+        function deleteSelectedEvent() {
+            const selector = document.getElementById('eventSelector');
+            const eventKey = selector.value;
+            
+            if (!eventKey) {
+                alert('Please select an event to delete.');
+                return;
+            }
+            
+            if (confirm(`Are you sure you want to delete event "${eventKey}"? This cannot be undone.`)) {
+                localStorage.removeItem('event_' + eventKey);
+                populateEventSelector();
+                selector.value = '';
+                alert(`Event "${eventKey}" deleted.`);
+            }
+        }
+
+        // Clear current event (for starting new)
+        function clearCurrentEvent() {
+            document.getElementById('eventInstitution').value = '';
+            document.getElementById('eventDate').value = '';
+            document.getElementById('generatedValuesSection').style.display = 'none';
+            
+            localStorage.removeItem('eventInstitution');
+            localStorage.removeItem('eventDate');
+            localStorage.removeItem('eventKey');
+            localStorage.removeItem('campaignName');
+            
+            for (let i = 1; i <= 10; i++) {
+                const checkbox = document.getElementById('step' + i);
+                checkbox.checked = false;
+                checkbox.closest('.step').classList.remove('checked');
+                localStorage.removeItem('step' + i);
+            }
+            
+            // Reset dynamic references
+            document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step4Naming = document.getElementById('step4-naming-convention');
+            if (step4Naming) step4Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step4EventKey = document.getElementById('step4-event-key');
+            if (step4EventKey) step4EventKey.innerHTML = '';
+            const step5EventKey = document.getElementById('step5-event-key');
+            if (step5EventKey) step5EventKey.innerHTML = '';
+            const step6WorkflowName = document.getElementById('step6-workflow-name');
+            if (step6WorkflowName) step6WorkflowName.innerHTML = '<em>[TS] - 2 - Send Pre-Show Emails - [Institution]</em>';
+            const step7Naming = document.getElementById('step7-naming-convention');
+            if (step7Naming) step7Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step8Naming = document.getElementById('step8-naming-convention');
+            if (step8Naming) step8Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step9WorkflowName = document.getElementById('step9-workflow-name');
+            if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
+            const step10WorkflowName = document.getElementById('step10-workflow-name');
+            if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
+            
+            updateProgress();
+        }
 
         // Toggle phase accordion
         function togglePhase(phaseNumber) {
@@ -1074,6 +1310,9 @@
             
             // Update all dynamic references in the steps
             updateDynamicReferences(eventKey, campaignName);
+            
+            // Auto-save this event
+            saveCurrentEvent();
         }
 
         // Update dynamic references throughout the document
@@ -1107,10 +1346,40 @@
                 step5EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
             }
             
+            // Update Step 6 - Workflow Clone Name
+            const step6WorkflowName = document.getElementById('step6-workflow-name');
+            const institution = localStorage.getItem('eventInstitution');
+            if (institution) {
+                const workflowName = `[TS] - 2 - Send Pre-Show Emails - ${institution}`;
+                step6WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+            }
+            
             // Update Step 7 - Naming Convention
             const step7Naming = document.getElementById('step7-naming-convention');
             if (campaignName) {
                 step7Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+            }
+            
+            // Update Step 8 - Naming Convention (Segment Name)
+            const step8Naming = document.getElementById('step8-naming-convention');
+            if (campaignName) {
+                step8Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+            }
+            
+            // Update Step 9 - Workflow Clone Name
+            const step9WorkflowName = document.getElementById('step9-workflow-name');
+            if (institution) {
+                const eventDate = localStorage.getItem('eventDate');
+                const workflowName = `[TS] - 3 - Post-Show Processing - ${eventDate || 'YYYY-MM-DD'} - ${institution}`;
+                step9WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+            }
+            
+            // Update Step 10 - Workflow Clone Name
+            const step10WorkflowName = document.getElementById('step10-workflow-name');
+            if (institution) {
+                const eventDate = localStorage.getItem('eventDate');
+                const workflowName = `[TS] - 4 - Send Post-Show Emails - ${eventDate || 'YYYY-MM-DD'} - ${institution}`;
+                step10WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
         }
 
@@ -1270,6 +1539,12 @@
             const percentage = (completed / total) * 100;
             document.getElementById('progress-fill').style.width = percentage + '%';
             document.getElementById('progress-text').textContent = completed + '/' + total + ' steps completed';
+            
+            // Auto-save current event if one exists
+            const currentEventKey = localStorage.getItem('eventKey');
+            if (currentEventKey) {
+                saveCurrentEvent();
+            }
         }
 
         // Reset all checkboxes
@@ -1304,8 +1579,16 @@
                 if (step4EventKey) step4EventKey.innerHTML = '';
                 const step5EventKey = document.getElementById('step5-event-key');
                 if (step5EventKey) step5EventKey.innerHTML = '';
+                const step6WorkflowName = document.getElementById('step6-workflow-name');
+                if (step6WorkflowName) step6WorkflowName.innerHTML = '<em>[TS] - 2 - Send Pre-Show Emails - [Institution]</em>';
                 const step7Naming = document.getElementById('step7-naming-convention');
                 if (step7Naming) step7Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+                const step8Naming = document.getElementById('step8-naming-convention');
+                if (step8Naming) step8Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+                const step9WorkflowName = document.getElementById('step9-workflow-name');
+                if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
+                const step10WorkflowName = document.getElementById('step10-workflow-name');
+                if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
                 
                 updateProgress();
             }
