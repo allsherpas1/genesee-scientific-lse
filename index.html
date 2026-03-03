@@ -1327,8 +1327,12 @@
             // Update all dynamic references in the steps
             updateDynamicReferences(eventKey, campaignName);
             
-            // Auto-save this event
-            saveCurrentEvent();
+            // Auto-save this event (wrapped in try-catch to prevent blocking)
+            try {
+                saveCurrentEvent();
+            } catch (err) {
+                console.log('Auto-save skipped:', err);
+            }
         }
 
         // Update dynamic references throughout the document
