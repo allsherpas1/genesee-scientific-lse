@@ -513,14 +513,15 @@
         }
 
         .collapsible-content {
-            max-height: 3000px;
+            max-height: 2000px;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
 
         .collapsible-content.collapsed {
-            max-height: 0;
-            padding: 0;
+            max-height: 0 !important;
+            padding: 0 !important;
+            overflow: hidden;
         }
 
         .step {
@@ -863,7 +864,7 @@
                 <div class="step-content">
                     <label for="step4">
                         <span class="step-number">Step 4</span>
-                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., akaufmann@geneseesci.com).</span>
+                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7312181206151e121d1d3314161d1600161600101a5d101c1e">[email&#160;protected]</a>).</span>
                     </label>
                 </div>
             </div>
@@ -959,7 +960,7 @@
                 <div class="step-content">
                     <label for="step5">
                         <span class="step-number">Step 5</span>
-                        <span class="step-text">Open the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong>. Update the segment enrollment and set the <strong>Event Key</strong> to <span id="step5-event-key"></span>. Turn the workflow <strong>ON</strong> to run it, then turn it <strong>OFF</strong> after completion. This prepares contact records for email.</span>
+                        <span class="step-text">Open the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong>. After opening the workflow, be sure to turn it off if it's not already off. Update the segment enrollment and set the <strong>Event Key</strong> to <span id="step5-event-key"></span>. Turn the workflow <strong>ON</strong> to run it, then turn it <strong>OFF</strong> after completion. This prepares contact records for email.</span>
                     </label>
                 </div>
             </div>
@@ -1061,7 +1062,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Load saved progress and event details from localStorage
         window.onload = function() {
             // Load checkboxes
@@ -1605,11 +1606,4 @@
                 const step9WorkflowName = document.getElementById('step9-workflow-name');
                 if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
                 const step10WorkflowName = document.getElementById('step10-workflow-name');
-                if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
-                
-                updateProgress();
-            }
-        }
-    </script>
-</body>
-</html>
+               
