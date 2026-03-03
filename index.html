@@ -1062,7 +1062,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Load saved progress and event details from localStorage
         window.onload = function() {
             // Load checkboxes
@@ -1608,4 +1608,11 @@
                 const step9WorkflowName = document.getElementById('step9-workflow-name');
                 if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
                 const step10WorkflowName = document.getElementById('step10-workflow-name');
-               
+               if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
+                
+                updateProgress();
+            }
+        }
+    </script>
+</body>
+</html>
