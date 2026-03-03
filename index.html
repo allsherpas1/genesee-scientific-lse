@@ -814,6 +814,23 @@
                         <span class="step-number">Step 2</span>
                         <span class="step-text">Find the <strong>Master Account Code</strong> in Salesforce using the <a href="https://geneseesci.lightning.force.com/lightning/r/Report/00Ocv00000WTGS3EAP/view?queryScope=userFolders" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Master Account Report</a>.</span>
                     </label>
+                    
+                    <div style="margin-top: 10px;">
+                        <div class="collapsible-section-header" onclick="toggleCollapsible('step2-details')" style="margin-top: 0; margin-bottom: 0;">
+                            <strong>How to find the code:</strong>
+                            <span class="collapsible-arrow collapsed" id="collapsible-arrow-step2-details">▼</span>
+                        </div>
+                        <div class="collapsible-content collapsed" id="collapsible-content-step2-details" style="background: white; padding: 15px; border-radius: 0 0 4px 4px;">
+                            <p style="margin: 0 0 10px 0; color: #475569; font-size: 14px;">To find the code, open the filters panel in the report and try to find the account using the Master Account field.</p>
+                            <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #475569; font-size: 14px;">
+                                <li style="margin-bottom: 8px;">First, try "equals" and use the name of the institution.</li>
+                                <li style="margin-bottom: 8px;">If that doesn't work, try "starts with" and use the first two words of the institution.</li>
+                                <li style="margin-bottom: 8px;">If that doesn't work, try "contains" and use a unique word in the institution's name.</li>
+                                <li style="margin-bottom: 0;">You could also use the Email Domains field and change it to "contains" and use the domain.</li>
+                            </ul>
+                            <img src="GSC-MasterAccountReport.png" alt="Master Account Report Filters" style="max-width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 4px; margin-top: 10px;">
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -846,7 +863,7 @@
                 <div class="step-content">
                     <label for="step4">
                         <span class="step-number">Step 4</span>
-                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details.</span>
+                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., akaufmann@geneseesci.com).</span>
                     </label>
                 </div>
             </div>
