@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="description" content="">
     <title>LSE Trade Show Process - Genesee Scientific Marketing</title>
     <style>
         * {
@@ -701,8 +705,21 @@
     <div class="container">
         <header>
             <h1>LSE Trade Show Process</h1>
-            <p class="subtitle">V5 - February 2026</p>
+            <p class="subtitle" id="version-display">v5.1 - Loading...</p>
         </header>
+
+        <script>
+            // Auto-update version display with current month/year
+            (function() {
+                const version = 'v5.1';
+                const now = new Date();
+                const monthNames = ["January", "February", "March", "April", "May", "June",
+                    "July", "August", "September", "October", "November", "December"];
+                const currentMonth = monthNames[now.getMonth()];
+                const currentYear = now.getFullYear();
+                document.getElementById('version-display').textContent = `${version} - ${currentMonth} ${currentYear}`;
+            })();
+        </script>
 
         <div class="overview">
             <h2>What This Process Does</h2>
@@ -864,7 +881,7 @@
                 <div class="step-content">
                     <label for="step4">
                         <span class="step-number">Step 4</span>
-                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7312181206151e121d1d3314161d1600161600101a5d101c1e">[email&#160;protected]</a>).</span>
+                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., akaufmann@geneseesci.com).</span>
                     </label>
                 </div>
             </div>
