@@ -818,7 +818,7 @@
                 <div class="step-content">
                     <label for="step1">
                         <span class="step-number">Step 1</span>
-                        <span class="step-text">Create the <strong>Salesforce Campaign</strong> using the naming convention <span id="step1-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>.</span>
+                        <span class="step-text">Create the <strong>Salesforce Campaign</strong> using the naming convention <span id="step1-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. The easiest way to do this is to clone the most recent LSE Show campaign. Be sure to change the "Responded" status to "Attended."</span>
                     </label>
                 </div>
             </div>
@@ -859,7 +859,7 @@
                 <div class="step-content">
                     <label for="step3">
                         <span class="step-number">Step 3</span>
-                        <span class="step-text">In HubSpot, <a href="https://app-na2.hubspot.com/contacts/242844030/objectLists/177/filters" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">clone the LSE Pre-Show List – TEMPLATE segment here</a>. Change the filter to the <strong>Master Account Code</strong> you found in Salesforce. Also, put the domain name in the "contains" filter. This will pull in all contacts that aren't linked to a master account.</span>
+                        <span class="step-text">In HubSpot, <a href="https://app-na2.hubspot.com/contacts/242844030/objectLists/177/filters" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">clone the LSE Pre-Show List – TEMPLATE segment here</a>. Change the filter to the <strong>Master Account Code</strong> you found in Salesforce. Also, put the domain name in the "contains" filter. This will pull in all contacts that aren't linked to a master account.<br><br>Save the segment. <strong>When done,</strong> convert the Segment to a static list. This will prevent any new contacts from matching the criteria after we add trade show information to the trade show fields.</span>
                     </label>
                 </div>
             </div>
@@ -881,7 +881,7 @@
                 <div class="step-content">
                     <label for="step4">
                         <span class="step-number">Step 4</span>
-                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., akaufmann@geneseesci.com).</span>
+                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f392989286959e929d9db394969d9680969680909add909c9e">[email&#160;protected]</a>).</span>
                     </label>
                 </div>
             </div>
@@ -1079,7 +1079,7 @@
         </div>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Load saved progress and event details from localStorage
         window.onload = function() {
             // Load checkboxes
@@ -1625,11 +1625,4 @@
                 const step9WorkflowName = document.getElementById('step9-workflow-name');
                 if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
                 const step10WorkflowName = document.getElementById('step10-workflow-name');
-               if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
-                
-                updateProgress();
-            }
-        }
-    </script>
-</body>
-</html>
+              
