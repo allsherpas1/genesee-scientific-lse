@@ -517,15 +517,14 @@
         }
 
         .collapsible-content {
-            max-height: 2000px;
+            max-height: 3000px;
             overflow: hidden;
             transition: max-height 0.3s ease;
         }
 
         .collapsible-content.collapsed {
-            max-height: 0 !important;
-            padding: 0 !important;
-            overflow: hidden;
+            max-height: 0;
+            padding: 0;
         }
 
         .step {
@@ -705,28 +704,15 @@
     <div class="container">
         <header>
             <h1>LSE Trade Show Process</h1>
-            <p class="subtitle" id="version-display">v5.1 - Loading...</p>
+            <p class="subtitle" id="version-display">Loading...</p>
         </header>
-
-        <script>
-            // Auto-update version display with current month/year
-            (function() {
-                const version = 'v5.1';
-                const now = new Date();
-                const monthNames = ["January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"];
-                const currentMonth = monthNames[now.getMonth()];
-                const currentYear = now.getFullYear();
-                document.getElementById('version-display').textContent = `${version} - ${currentMonth} ${currentYear}`;
-            })();
-        </script>
 
         <div class="overview">
             <h2>What This Process Does</h2>
             <p>
                 This document describes the process to send pre-show outreach emails to a targeted audience, linking the event to the correct sales rep, and for show follow up, associates the final attendance list with a Salesforce campaign, and sends the post-show emails.
             </p>
-
+            
             <div style="margin-top: 20px; padding-top: 15px; border-top: 2px solid #0066b2;">
                 <div class="collapsible-section-header" onclick="toggleCollapsible('workflow-ref')" style="margin-top: 0; border-radius: 4px;">
                     <h3 style="color: #003d6b; font-size: 16px; margin: 0;">Master Workflow Reference</h3>
@@ -773,7 +759,7 @@
 
             <h3>📋 Generate Values</h3>
             <p class="event-details-intro">Fill in these details and click Generate to create your Event Key and Campaign Name. You can then copy the values into Salesforce and HubSpot where appropriate.</p>
-
+            
             <div class="input-group">
                 <label for="eventInstitution">Event Institution</label>
                 <input type="text" id="eventInstitution" placeholder="e.g., Washington University – St. Louis">
@@ -788,7 +774,7 @@
 
             <div class="generated-values" id="generatedValuesSection" style="display: none;">
                 <h4>Generated Values (click to copy):</h4>
-
+                
                 <div class="copy-field">
                     <label>Event Key:</label>
                     <div class="copy-field-value" id="displayEventKey">-</div>
@@ -810,7 +796,7 @@
                 <span class="phase-arrow" id="phase-arrow-1">▼</span>
             </div>
             <div class="phase-content" id="phase-content-1">
-
+            
             <div class="step" data-step="1">
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="step1" onchange="updateProgress()">
@@ -832,23 +818,6 @@
                         <span class="step-number">Step 2</span>
                         <span class="step-text">Find the <strong>Master Account Code</strong> in Salesforce using the <a href="https://geneseesci.lightning.force.com/lightning/r/Report/00Ocv00000WTGS3EAP/view?queryScope=userFolders" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Master Account Report</a>.</span>
                     </label>
-
-                    <div style="margin-top: 10px;">
-                        <div class="collapsible-section-header" onclick="toggleCollapsible('step2-details')" style="margin-top: 0; margin-bottom: 0;">
-                            <strong>How to find the code:</strong>
-                            <span class="collapsible-arrow collapsed" id="collapsible-arrow-step2-details">▼</span>
-                        </div>
-                        <div class="collapsible-content collapsed" id="collapsible-content-step2-details" style="background: white; padding: 15px; border-radius: 0 0 4px 4px;">
-                            <p style="margin: 0 0 10px 0; color: #475569; font-size: 14px;">To find the code, open the filters panel in the report and try to find the account using the Master Account field.</p>
-                            <ul style="margin: 0 0 15px 0; padding-left: 20px; color: #475569; font-size: 14px;">
-                                <li style="margin-bottom: 8px;">First, try "equals" and use the name of the institution.</li>
-                                <li style="margin-bottom: 8px;">If that doesn't work, try "starts with" and use the first two words of the institution.</li>
-                                <li style="margin-bottom: 8px;">If that doesn't work, try "contains" and use a unique word in the institution's name.</li>
-                                <li style="margin-bottom: 0;">You could also use the Email Domains field and change it to "contains" and use the domain.</li>
-                            </ul>
-                            <img src="GSC-MasterAccountReport.png" alt="Master Account Report Filters" style="max-width: 100%; height: auto; border: 1px solid #e2e8f0; border-radius: 4px; margin-top: 10px;">
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -859,7 +828,7 @@
                 <div class="step-content">
                     <label for="step3">
                         <span class="step-number">Step 3</span>
-                        <span class="step-text">In HubSpot, <a href="https://app-na2.hubspot.com/contacts/242844030/objectLists/177/filters" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">clone the LSE Pre-Show List – TEMPLATE segment here</a>. Change the filter to the <strong>Master Account Code</strong> you found in Salesforce. Also, put the domain name in the "contains" filter. This will pull in all contacts that aren't linked to a master account.<br><br>Save the segment. <strong>When done,</strong> convert the Segment to a static list. This will prevent any new contacts from matching the criteria after we add trade show information to the trade show fields.</span>
+                        <span class="step-text">In HubSpot, <a href="https://app-na2.hubspot.com/contacts/242844030/objectLists/177/filters" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">clone the LSE Pre-Show List – TEMPLATE segment here</a>. Change the filter to the <strong>Master Account Code</strong> you found in Salesforce.<br><br>Save the segment. <strong>When done,</strong> convert the Segment to a static list. This will prevent any new contacts from matching the criteria after we add trade show information to the trade show fields.</span>
                     </label>
                 </div>
             </div>
@@ -873,7 +842,7 @@
                 <span class="phase-arrow" id="phase-arrow-2">▼</span>
             </div>
             <div class="phase-content" id="phase-content-2">
-
+            
             <div class="step" data-step="4">
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="step4" onchange="updateProgress()">
@@ -881,7 +850,7 @@
                 <div class="step-content">
                     <label for="step4">
                         <span class="step-number">Step 4</span>
-                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details. <strong>Note:</strong> When entering the sales rep's email address, use all lowercase letters (e.g., <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="f392989286959e929d9db394969d9680969680909add909c9e">[email&#160;protected]</a>).</span>
+                        <span class="step-text">Create the <strong>Trade Show Record</strong> in HubSpot by going <a href="https://app-na2.hubspot.com/contacts/242844030/objects/2-224620115/views/all/list" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">here</a> and clicking 'Create Trade show.' Use the generated name <span id="step4-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span>. Add in the Event Key <span id="step4-event-key"></span>, as well as the rest of the details.</span>
                     </label>
                 </div>
             </div>
@@ -889,14 +858,14 @@
             <div class="info-box">
                 <strong>💡 Note: Missing Event Information</strong>
                 If any of the event information hasn't been announced yet and the first email needs to send, leave the values blank and nothing will appear. If you'd like to put in a statement to that fact, edit the "Time" field on the event record and say "Final event details are coming soon." The rest of the fields will stay blank.
-
+                
                 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #90caf9;">
                     <div class="collapsible-section-header" onclick="toggleCollapsible('event-info')">
                         <strong>When Event Information Becomes Available:</strong>
                         <span class="collapsible-arrow collapsed" id="collapsible-arrow-event-info">▼</span>
                     </div>
                     <div class="collapsible-content collapsed" id="collapsible-content-event-info">
-
+                    
                     <div class="info-step">
                         <div class="info-checkbox">
                             <input type="checkbox">
@@ -977,7 +946,7 @@
                 <div class="step-content">
                     <label for="step5">
                         <span class="step-number">Step 5</span>
-                        <span class="step-text">Open the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong>. After opening the workflow, be sure to turn it off if it's not already off. Update the segment enrollment and set the <strong>Event Key</strong> to <span id="step5-event-key"></span>. Turn the workflow ON. Choose "Yes" to enroll Contacts who meet the enrollment criteria when the workflow is turned on. It will take a few minutes to finish. This will prepare the Contact records for email.</span>
+                        <span class="step-text">Open the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong>. Update the segment enrollment and set the <strong>Event Key</strong> to <span id="step5-event-key"></span>. Turn the workflow <strong>ON</strong> to run it, then turn it <strong>OFF</strong> after completion. This prepares contact records for email.</span>
                     </label>
                 </div>
             </div>
@@ -991,7 +960,7 @@
                 <span class="phase-arrow" id="phase-arrow-3">▼</span>
             </div>
             <div class="phase-content" id="phase-content-3">
-
+            
             <div class="step" data-step="6">
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="step6" onchange="updateProgress()">
@@ -1079,7 +1048,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         // Load saved progress and event details from localStorage
         window.onload = function() {
             // Load checkboxes
@@ -1091,29 +1060,29 @@
                     checkbox.closest('.step').classList.add('checked');
                 }
             }
-
+            
             // Load event details
             const savedEventInstitution = localStorage.getItem('eventInstitution');
             const savedEventDate = localStorage.getItem('eventDate');
             const savedEventKey = localStorage.getItem('eventKey');
             const savedCampaignName = localStorage.getItem('campaignName');
-
+            
             if (savedEventInstitution) document.getElementById('eventInstitution').value = savedEventInstitution;
             if (savedEventDate) document.getElementById('eventDate').value = savedEventDate;
-
+            
             // Show generated values if they exist
             if (savedEventKey && savedCampaignName) {
                 document.getElementById('displayEventKey').textContent = savedEventKey;
                 document.getElementById('displayCampaignName').textContent = savedCampaignName;
                 document.getElementById('generatedValuesSection').style.display = 'block';
-
+                
                 // Update dynamic references in steps
                 updateDynamicReferences(savedEventKey, savedCampaignName);
             }
-
+            
             // Load saved events into dropdown
             populateEventSelector();
-
+            
             updateProgress();
         };
 
@@ -1138,10 +1107,10 @@
         function populateEventSelector() {
             const selector = document.getElementById('eventSelector');
             const events = getAllSavedEvents();
-
+            
             // Clear existing options except the first one
             selector.innerHTML = '<option value="">+ Start New Event</option>';
-
+            
             // Add saved events
             Object.keys(events).sort().forEach(eventKey => {
                 const event = events[eventKey];
@@ -1159,7 +1128,7 @@
                 alert('Please generate an Event Key first before saving.');
                 return;
             }
-
+            
             // Gather all current state
             const eventData = {
                 eventKey: eventKey,
@@ -1168,56 +1137,58 @@
                 date: localStorage.getItem('eventDate'),
                 checkboxes: {}
             };
-
+            
             // Save checkbox states
             for (let i = 1; i <= 10; i++) {
                 eventData.checkboxes['step' + i] = localStorage.getItem('step' + i) === 'true';
             }
-
+            
             // Save to localStorage with event_ prefix
             localStorage.setItem('event_' + eventKey, JSON.stringify(eventData));
-
+            
             // Refresh dropdown
             populateEventSelector();
-
+            
             // Set selector to current event
             document.getElementById('eventSelector').value = eventKey;
+            
+            alert(`Event "${eventKey}" saved successfully!`);
         }
 
         // Load selected event
         function loadSelectedEvent() {
             const selector = document.getElementById('eventSelector');
             const eventKey = selector.value;
-
+            
             if (!eventKey) {
                 // Start new event - clear everything
                 clearCurrentEvent();
                 return;
             }
-
+            
             const eventData = JSON.parse(localStorage.getItem('event_' + eventKey));
             if (!eventData) {
                 alert('Event not found.');
                 return;
             }
-
+            
             // Load event details
             document.getElementById('eventInstitution').value = eventData.institution || '';
             document.getElementById('eventDate').value = eventData.date || '';
-
+            
             localStorage.setItem('eventInstitution', eventData.institution || '');
             localStorage.setItem('eventDate', eventData.date || '');
             localStorage.setItem('eventKey', eventData.eventKey);
             localStorage.setItem('campaignName', eventData.campaignName);
-
+            
             // Show generated values
             document.getElementById('displayEventKey').textContent = eventData.eventKey;
             document.getElementById('displayCampaignName').textContent = eventData.campaignName;
             document.getElementById('generatedValuesSection').style.display = 'block';
-
+            
             // Update dynamic references
             updateDynamicReferences(eventData.eventKey, eventData.campaignName);
-
+            
             // Load checkbox states
             for (let i = 1; i <= 10; i++) {
                 const checkbox = document.getElementById('step' + i);
@@ -1230,9 +1201,9 @@
                     checkbox.closest('.step').classList.remove('checked');
                 }
             }
-
+            
             updateProgress();
-
+            
             alert(`Event "${eventKey}" loaded successfully!`);
         }
 
@@ -1240,12 +1211,12 @@
         function deleteSelectedEvent() {
             const selector = document.getElementById('eventSelector');
             const eventKey = selector.value;
-
+            
             if (!eventKey) {
                 alert('Please select an event to delete.');
                 return;
             }
-
+            
             if (confirm(`Are you sure you want to delete event "${eventKey}"? This cannot be undone.`)) {
                 localStorage.removeItem('event_' + eventKey);
                 populateEventSelector();
@@ -1259,19 +1230,19 @@
             document.getElementById('eventInstitution').value = '';
             document.getElementById('eventDate').value = '';
             document.getElementById('generatedValuesSection').style.display = 'none';
-
+            
             localStorage.removeItem('eventInstitution');
             localStorage.removeItem('eventDate');
             localStorage.removeItem('eventKey');
             localStorage.removeItem('campaignName');
-
+            
             for (let i = 1; i <= 10; i++) {
                 const checkbox = document.getElementById('step' + i);
                 checkbox.checked = false;
                 checkbox.closest('.step').classList.remove('checked');
                 localStorage.removeItem('step' + i);
             }
-
+            
             // Reset dynamic references
             document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step4Naming = document.getElementById('step4-naming-convention');
@@ -1290,7 +1261,7 @@
             if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
             const step10WorkflowName = document.getElementById('step10-workflow-name');
             if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
-
+            
             updateProgress();
         }
 
@@ -1298,7 +1269,7 @@
         function togglePhase(phaseNumber) {
             const content = document.getElementById('phase-content-' + phaseNumber);
             const arrow = document.getElementById('phase-arrow-' + phaseNumber);
-
+            
             content.classList.toggle('collapsed');
             arrow.classList.toggle('collapsed');
         }
@@ -1307,7 +1278,7 @@
         function toggleCollapsible(sectionId) {
             const content = document.getElementById('collapsible-content-' + sectionId);
             const arrow = document.getElementById('collapsible-arrow-' + sectionId);
-
+            
             content.classList.toggle('collapsed');
             arrow.classList.toggle('collapsed');
         }
@@ -1316,40 +1287,36 @@
         function generateValues() {
             const institution = document.getElementById('eventInstitution').value;
             const date = document.getElementById('eventDate').value;
-
+            
             if (!institution || !date) {
                 alert('Please fill in both Event Institution and Event Date');
                 return;
             }
-
+            
             // Save inputs
             localStorage.setItem('eventInstitution', institution);
             localStorage.setItem('eventDate', date);
-
+            
             // Generate Event Key (short lowercase identifier)
             let eventKey = generateEventKey(institution);
-
+            
             // Generate Campaign Name (LSE | YYYY-MM-DD | Institution)
             let campaignName = `LSE | ${date} | ${institution}`;
-
+            
             // Save generated values
             localStorage.setItem('eventKey', eventKey);
             localStorage.setItem('campaignName', campaignName);
-
+            
             // Display generated values
             document.getElementById('displayEventKey').textContent = eventKey;
             document.getElementById('displayCampaignName').textContent = campaignName;
             document.getElementById('generatedValuesSection').style.display = 'block';
-
+            
             // Update all dynamic references in the steps
             updateDynamicReferences(eventKey, campaignName);
-
-            // Auto-save this event (wrapped in try-catch to prevent blocking)
-            try {
-                saveCurrentEvent();
-            } catch (err) {
-                console.log('Auto-save skipped:', err);
-            }
+            
+            // Auto-save this event
+            saveCurrentEvent();
         }
 
         // Update dynamic references throughout the document
@@ -1358,31 +1325,31 @@
             function createInlineCopy(value, label) {
                 return `<span class="inline-copy-value">${value} <button class="inline-copy-button" onclick="copyInline(this, '${value.replace(/'/g, "\\'")}')">Copy</button></span>`;
             }
-
+            
             // Update Step 1 - Naming Convention (Salesforce Campaign)
             const step1Naming = document.getElementById('step1-naming-convention');
             if (campaignName) {
                 step1Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
-
+            
             // Update Step 4 - Naming Convention and Event Key (Trade Show Record)
             const step4Naming = document.getElementById('step4-naming-convention');
             if (campaignName) {
                 step4Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
-
+            
             // Update Step 4 - Event Key
             const step4EventKey = document.getElementById('step4-event-key');
             if (eventKey) {
                 step4EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
             }
-
+            
             // Update Step 5 - Event Key
             const step5EventKey = document.getElementById('step5-event-key');
             if (eventKey) {
                 step5EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
             }
-
+            
             // Update Step 6 - Workflow Clone Name
             const step6WorkflowName = document.getElementById('step6-workflow-name');
             const institution = localStorage.getItem('eventInstitution');
@@ -1390,19 +1357,19 @@
                 const workflowName = `[TS] - 2 - Send Pre-Show Emails - ${institution}`;
                 step6WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
-
+            
             // Update Step 7 - Naming Convention
             const step7Naming = document.getElementById('step7-naming-convention');
             if (campaignName) {
                 step7Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
-
+            
             // Update Step 8 - Naming Convention (Segment Name)
             const step8Naming = document.getElementById('step8-naming-convention');
             if (campaignName) {
                 step8Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
-
+            
             // Update Step 9 - Workflow Clone Name
             const step9WorkflowName = document.getElementById('step9-workflow-name');
             if (institution) {
@@ -1410,7 +1377,7 @@
                 const workflowName = `[TS] - 3 - Post-Show Processing - ${eventDate || 'YYYY-MM-DD'} - ${institution}`;
                 step9WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
-
+            
             // Update Step 10 - Workflow Clone Name
             const step10WorkflowName = document.getElementById('step10-workflow-name');
             if (institution) {
@@ -1428,13 +1395,13 @@
             textarea.style.opacity = '0';
             document.body.appendChild(textarea);
             textarea.select();
-
+            
             try {
                 document.execCommand('copy');
                 const originalText = button.textContent;
                 button.textContent = 'Copied!';
                 button.classList.add('copied');
-
+                
                 setTimeout(() => {
                     button.textContent = originalText;
                     button.classList.remove('copied');
@@ -1442,40 +1409,40 @@
             } catch (err) {
                 console.error('Failed to copy:', err);
             }
-
+            
             document.body.removeChild(textarea);
         }
 
         // Generate short event key from institution name
         function generateEventKey(institution) {
             if (!institution) return '';
-
+            
             // Convert to lowercase and remove special characters except spaces and dashes
             let cleaned = institution.toLowerCase().replace(/[^a-z\s-]/g, '');
-
+            
             // Remove location part (after dash)
             if (cleaned.includes(' – ') || cleaned.includes(' - ')) {
                 cleaned = cleaned.split(/\s*[-–]\s*/)[0];
             }
-
+            
             // Split into words
             let words = cleaned.split(/\s+/).filter(w => w.length > 0);
-
+            
             // Filter out common words that don't identify the institution
             const commonWords = ['the', 'of', 'and', 'at', 'in', 'for', 'university', 'college', 'institute', 'school'];
             let meaningfulWords = words.filter(w => !commonWords.includes(w));
-
+            
             // If we filtered everything out, use the original words minus just 'university'
             if (meaningfulWords.length === 0) {
                 meaningfulWords = words.filter(w => w !== 'university');
             }
-
+            
             // Take the most distinctive word (usually the first meaningful word)
             // For "University of Michigan" → "michigan"
             // For "Washington University" → "washington"
             // For "UC Berkeley" → "uc berkeley" → "ucberkeley"
             let key = 'lse' + meaningfulWords.join('');
-
+            
             return key;
         }
 
@@ -1492,32 +1459,32 @@
             const eventKey = document.getElementById('eventKey').value;
             const eventDate = document.getElementById('eventDate').value;
             const eventLocation = document.getElementById('eventLocation').value;
-
+            
             // Save to localStorage
             localStorage.setItem('eventInstitution', eventInstitution);
             localStorage.setItem('eventDate', eventDate);
             localStorage.setItem('eventLocation', eventLocation);
-
+            
             // Auto-generate event key if it's empty or if institution just changed
             if (eventInstitution && !eventKey) {
                 const generated = generateEventKey(eventInstitution);
                 document.getElementById('eventKey').value = generated;
                 localStorage.setItem('eventKey', generated);
             }
-
+            
             // Format date
             let formattedDate = 'YYYY-MM-DD';
             if (eventDate) {
                 formattedDate = eventDate; // Already in YYYY-MM-DD format from date input
             }
-
+            
             // Update naming convention
             let namingConvention = 'LSE | YYYY-MM-DD | Institution – Location';
             if (eventDate || eventLocation) {
                 namingConvention = `LSE | ${formattedDate} | ${eventLocation || 'Institution – Location'}`;
             }
             document.getElementById('namingConvention').textContent = namingConvention;
-
+            
             // Update event key display
             const currentKey = document.getElementById('eventKey').value;
             document.getElementById('displayEventKey').textContent = currentKey || 'Enter event details above';
@@ -1526,7 +1493,7 @@
         // Copy to clipboard function
         function copyToClipboard(elementId, button) {
             const text = document.getElementById(elementId).textContent;
-
+            
             // Create temporary textarea to copy from
             const textarea = document.createElement('textarea');
             textarea.value = text;
@@ -1534,14 +1501,14 @@
             textarea.style.opacity = '0';
             document.body.appendChild(textarea);
             textarea.select();
-
+            
             try {
                 document.execCommand('copy');
                 // Change button text temporarily
                 const originalText = button.textContent;
                 button.textContent = 'Copied!';
                 button.classList.add('copied');
-
+                
                 setTimeout(() => {
                     button.textContent = originalText;
                     button.classList.remove('copied');
@@ -1549,7 +1516,7 @@
             } catch (err) {
                 console.error('Failed to copy:', err);
             }
-
+            
             document.body.removeChild(textarea);
         }
 
@@ -1561,7 +1528,7 @@
             for (let i = 1; i <= total; i++) {
                 const checkbox = document.getElementById('step' + i);
                 const step = checkbox.closest('.step');
-
+                
                 if (checkbox.checked) {
                     completed++;
                     step.classList.add('checked');
@@ -1576,7 +1543,7 @@
             const percentage = (completed / total) * 100;
             document.getElementById('progress-fill').style.width = percentage + '%';
             document.getElementById('progress-text').textContent = completed + '/' + total + ' steps completed';
-
+            
             // Auto-save current event if one exists
             const currentEventKey = localStorage.getItem('eventKey');
             if (currentEventKey) {
@@ -1594,7 +1561,7 @@
                     checkbox.closest('.step').classList.remove('checked');
                     localStorage.setItem('step' + i, 'false');
                 }
-
+                
                 // Clear event details
                 document.getElementById('eventInstitution').value = '';
                 document.getElementById('eventDate').value = '';
@@ -1602,12 +1569,12 @@
                 localStorage.removeItem('eventDate');
                 localStorage.removeItem('eventKey');
                 localStorage.removeItem('campaignName');
-
+                
                 // Hide and reset generated values
                 document.getElementById('generatedValuesSection').style.display = 'none';
                 document.getElementById('displayEventKey').textContent = '-';
                 document.getElementById('displayCampaignName').textContent = '-';
-
+                
                 // Reset all dynamic references back to placeholders
                 document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
                 const step4Naming = document.getElementById('step4-naming-convention');
@@ -1625,3 +1592,22 @@
                 const step9WorkflowName = document.getElementById('step9-workflow-name');
                 if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
                 const step10WorkflowName = document.getElementById('step10-workflow-name');
+                if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
+                
+                updateProgress();
+            }
+        }
+
+        // Auto-update version display with current month/year
+        (function() {
+            const version = 'v5.1';
+            const now = new Date();
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+            const currentMonth = monthNames[now.getMonth()];
+            const currentYear = now.getFullYear();
+            document.getElementById('version-display').textContent = `${version} - ${currentMonth} ${currentYear}`;
+        })();
+    </script>
+</body>
+</html>
