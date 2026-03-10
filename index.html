@@ -1015,6 +1015,39 @@
             </div>
             <div class="phase-content" id="phase-content-4">
 
+            <div class="event-details" style="margin-bottom: 30px;">
+                <h3>📋 Post-Show Event Information</h3>
+                <p class="event-details-intro">If you completed the pre-show process using this tool, you can load the event from the dropdown at the top. Otherwise, enter the Event Key and Campaign Name below.</p>
+                
+                <div class="input-group">
+                    <label for="postShowEventKey">Event Key</label>
+                    <input type="text" id="postShowEventKey" placeholder="e.g., lsewashington">
+                </div>
+
+                <div class="input-group">
+                    <label for="postShowCampaignName">Campaign Name</label>
+                    <input type="text" id="postShowCampaignName" placeholder="e.g., LSE | 2026-03-15 | Washington University – St. Louis">
+                </div>
+
+                <button class="reset-button" style="margin-top: 10px; width: auto;" onclick="updatePostShowValues()">Update Post-Show Values</button>
+
+                <div class="generated-values" id="postShowValuesSection" style="display: none; margin-top: 20px;">
+                    <h4>Post-Show Values (click to copy):</h4>
+                    
+                    <div class="copy-field">
+                        <label>Event Key:</label>
+                        <div class="copy-field-value" id="displayPostShowEventKey">-</div>
+                        <button class="copy-button" onclick="copyToClipboard('displayPostShowEventKey', this)">Copy</button>
+                    </div>
+
+                    <div class="copy-field">
+                        <label>Campaign Name:</label>
+                        <div class="copy-field-value" id="displayPostShowCampaignName">-</div>
+                        <button class="copy-button" onclick="copyToClipboard('displayPostShowCampaignName', this)">Copy</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="step" data-step="7">
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="step7" onchange="updateProgress()">
@@ -1059,11 +1092,12 @@
                 <div class="step-content">
                     <label for="step9">
                         <span class="step-number">Step 9</span>
-                        <span class="step-text">Set up the post-show processing workflow:
+                        <span class="step-text">Set up the post-show processing workflow to 1) add contacts to the Salesforce campaign, and 2) populate the list's trade show and sales rep fields with the correct values for the post-show emails:
                             <ul style="margin: 10px 0 0 20px;">
                                 <li>Go to the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 3 - Post-show processing</a></strong> workflow</li>
                                 <li>Clone it and name it: <span id="step9-workflow-name"><em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em></span></li>
                                 <li>Update the enrollment trigger to point to the segment you just created</li>
+                                <li>Update the TS Event Key to: <span id="step9-event-key"></span></li>
                                 <li>Update the Salesforce Campaign action: Select the correct campaign and confirm Campaign Member Status</li>
                                 <li>Save the workflow</li>
                             </ul>
@@ -1245,6 +1279,14 @@
             
             // Update dynamic references
             updateDynamicReferences(eventData.eventKey, eventData.campaignName);
+            
+            // Also populate post-show fields
+            document.getElementById('postShowEventKey').value = eventData.eventKey;
+            document.getElementById('postShowCampaignName').value = eventData.campaignName;
+            document.getElementById('displayPostShowEventKey').textContent = eventData.eventKey;
+            document.getElementById('displayPostShowCampaignName').textContent = eventData.campaignName;
+            document.getElementById('postShowValuesSection').style.display = 'block';
+            updatePostShowDynamicReferences(eventData.eventKey, eventData.campaignName);
             
             // Load checkbox states
             for (let i = 1; i <= 10; i++) {
@@ -1663,6 +1705,70 @@
             const currentYear = now.getFullYear();
             document.getElementById('version-display').textContent = `${version} - ${currentMonth} ${currentYear}`;
         })();
+
+        // Update post-show values
+        function updatePostShowValues() {
+            const eventKey = document.getElementById('postShowEventKey').value;
+            const campaignName = document.getElementById('postShowCampaignName').value;
+
+            if (!eventKey || !campaignName) {
+                alert('Please fill in both Event Key and Campaign Name');
+                return;
+            }
+
+            // Display the values
+            document.getElementById('displayPostShowEventKey').textContent = eventKey;
+            document.getElementById('displayPostShowCampaignName').textContent = campaignName;
+            document.getElementById('postShowValuesSection').style.display = 'block';
+
+            // Update dynamic references in Phase 4 steps (Steps 7-10)
+            updatePostShowDynamicReferences(eventKey, campaignName);
+        }
+
+        // Update dynamic references for post-show steps
+        function updatePostShowDynamicReferences(eventKey, campaignName) {
+            // Helper function to create inline copy element
+            function createInlineCopy(value, label) {
+                return `<span class="inline-copy-value">${value} <button class="inline-copy-button" onclick="copyInline(this, '${value.replace(/'/g, "\\'")}')">Copy</button></span>`;
+            }
+
+            // Get institution from campaign name (after the last |)
+            const parts = campaignName.split('|');
+            const institution = parts.length > 2 ? parts[2].trim() : '';
+            const eventDate = parts.length > 1 ? parts[1].trim() : '';
+
+            // Update Step 7 - Campaign Name
+            const step7Naming = document.getElementById('step7-naming-convention');
+            if (step7Naming && campaignName) {
+                step7Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+            }
+
+            // Update Step 8 - Campaign Name
+            const step8Naming = document.getElementById('step8-naming-convention');
+            if (step8Naming && campaignName) {
+                step8Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+            }
+
+            // Update Step 9 - Event Key
+            const step9EventKey = document.getElementById('step9-event-key');
+            if (step9EventKey && eventKey) {
+                step9EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
+            }
+
+            // Update Step 9 - Workflow Name
+            const step9WorkflowName = document.getElementById('step9-workflow-name');
+            if (step9WorkflowName && institution && eventDate) {
+                const workflowName = `[TS] - 3 - Post-Show Processing - ${eventDate} - ${institution}`;
+                step9WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+            }
+
+            // Update Step 10 - Workflow Name
+            const step10WorkflowName = document.getElementById('step10-workflow-name');
+            if (step10WorkflowName && institution && eventDate) {
+                const workflowName = `[TS] - 4 - Send Post-Show Emails - ${eventDate} - ${institution}`;
+                step10WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+            }
+        }
     </script>
 </body>
 </html>
