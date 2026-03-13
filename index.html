@@ -713,6 +713,10 @@
                 This document describes the process to send pre-show outreach emails to a targeted audience, linking the event to the correct sales rep, and for show follow up, associates the final attendance list with a Salesforce campaign, and sends the post-show emails.
             </p>
             
+            <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #8dc63f;">
+                <strong>Note:</strong> Need to add a new sales rep record? <a href="#sales-rep-setup" style="color: #0066b2; text-decoration: underline;">See Sales Rep Setup instructions here</a>.
+            </p>
+
             <div style="margin-top: 20px; padding-top: 15px; border-top: 2px solid #0066b2;">
                 <div class="collapsible-section-header" onclick="toggleCollapsible('workflow-ref')" style="margin-top: 0; border-radius: 4px;">
                     <h3 style="color: #003d6b; font-size: 16px; margin: 0;">Master Workflow Reference</h3>
@@ -965,9 +969,10 @@
                 <div class="step-content">
                     <label for="step5">
                         <span class="step-number">Step 5</span>
-                        <span class="step-text">Run the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong> workflow:
+                        <span class="step-text">Clone the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong> workflow:
                             <ul style="margin: 10px 0 0 20px;">
-                                <li>Open the workflow and turn it <strong>OFF</strong> if it's not already off</li>
+                                <li>Open the workflow</li>
+                                <li>Clone it and name it appropriately for this event</li>
                                 <li>Update the segment enrollment to your LSE Pre-Show segment</li>
                                 <li>Set the <strong>Event Key</strong> to <span id="step5-event-key"></span></li>
                                 <li>Turn the workflow <strong>ON</strong> and choose "Yes" to enroll contacts who meet enrollment criteria</li>
@@ -1138,6 +1143,80 @@
                 <li>Always update the enrollment list before importing.</li>
             </ul>
             <p>All events use the same workflow structure.</p>
+        </div>
+
+        <!-- Sales Rep Setup -->
+        <div id="sales-rep-setup" style="background: linear-gradient(to right, #e8f5e9, #f0f8ff); border-left: 4px solid #8dc63f; padding: 30px; margin-top: 30px; border-radius: 4px;">
+            <h2 style="color: #003d6b; font-size: 22px; margin-bottom: 15px;">👤 Sales Rep Setup</h2>
+            
+            <div style="background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+                <p style="margin: 0; color: #856404; font-size: 15px; line-height: 1.6;">
+                    <strong>Important:</strong> Each Trade Show is associated to a Sales Rep. We match the Trade Show record to the Sales Rep record by the rep's email address. The address <strong>MUST be all lowercase</strong> - do not use upper/lower case characters, or else the data won't match.
+                </p>
+            </div>
+
+            <h3 style="color: #003d6b; font-size: 18px; margin: 25px 0 15px 0;">Part 1: Upload Sales Rep Photo</h3>
+            
+            <div style="margin-bottom: 15px; padding-left: 0;">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">1</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Go to <strong>Content > Files</strong></span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">2</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Go into the folder <strong>"Sales Rep Headshots"</strong></span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">3</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Click <strong>"Upload files"</strong> in the upper right corner, then find and upload the rep's headshot</span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">4</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">After uploading, click <strong>"Actions"</strong> on the rep's photo, then <strong>"Copy file URL"</strong></span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">5</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Use the <strong>"landing.geneseesci.com"</strong> version of the URL</span>
+                </div>
+            </div>
+
+            <h3 style="color: #003d6b; font-size: 18px; margin: 25px 0 15px 0;">Part 2: Create Sales Rep Record</h3>
+            
+            <div style="margin-bottom: 15px; padding-left: 0;">
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">1</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Go to <strong>CRM > Sales Reps</strong></span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">2</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Click <strong>"Create Sales Rep"</strong></span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">3</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Enter their first and last name, then click <strong>"Create sales rep"</strong></span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">4</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">On the Sales Rep's record page, fill in all the fields on the left</span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">5</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">Paste the copied URL into the <strong>"Sales Rep Image URL"</strong> field</span>
+                </div>
+                
+                <div style="display: flex; align-items: flex-start; margin-bottom: 12px;">
+                    <span style="display: inline-block; background: #8dc63f; color: white; font-weight: 600; padding: 2px 10px; border-radius: 4px; margin-right: 10px; font-size: 14px; min-width: 30px; text-align: center;">6</span>
+                    <span style="color: #334155; font-size: 15px; line-height: 1.7;">The record will automatically save as you fill in the fields</span>
+                </div>
+            </div>
         </div>
     </div>
 
