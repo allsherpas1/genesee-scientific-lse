@@ -692,7 +692,7 @@
     <div class="controls">
         <div class="progress-bar-container">
             <div class="progress-label">
-                Progress: <span id="progress-text">0/10 steps completed</span>
+                Progress: <span id="progress-text">0/11 steps completed</span>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progress-fill"></div>
@@ -840,8 +840,8 @@
                         <span class="step-number">Step 3</span>
                         <span class="step-text">In HubSpot, <a href="https://app-na2.hubspot.com/contacts/242844030/objectLists/177/filters" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">clone the LSE Pre-Show List – TEMPLATE segment here</a>:
                             <ul style="margin: 10px 0 0 20px;">
-                                <li>Change the filter to the <strong>Master Account Code</strong> you found in Salesforce</li>
-                                <li>Save the segment</li>
+                                <li>Change the filter for <strong>Master Account Code - Lab Level</strong> to the <strong>Master Account Code</strong> you found in Salesforce</li>
+                                <li>Save the segment as: <span id="step3-segment-name"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
                                 <li><strong>When done,</strong> convert the Segment to a static list (this prevents new contacts from matching the criteria after you add trade show information)</li>
                             </ul>
                         </span>
@@ -1118,10 +1118,31 @@
                 <div class="step-content">
                     <label for="step10">
                         <span class="step-number">Step 10</span>
+                        <span class="step-text">Create a Salesforce Campaign Member report:
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>After the post-show processing workflow completes, contacts will sync to the Salesforce campaign</li>
+                                <li>Go to the <a href="https://geneseesci.lightning.force.com/lightning/r/Report/00Ocv00000ZbJqkEAF/view" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Campaign Member Reports list</a></li>
+                                <li>Choose the most recent report and clone it</li>
+                                <li>Rename the cloned report to: <span id="step10-campaign-report"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
+                                <li>While editing the report, change the campaign name in the filter to match your campaign</li>
+                                <li>Save and run the report</li>
+                            </ul>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="step" data-step="11">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="step11" onchange="updateProgress()">
+                </div>
+                <div class="step-content">
+                    <label for="step11">
+                        <span class="step-number">Step 11</span>
                         <span class="step-text">Set up the post-show email workflow:
                             <ul style="margin: 10px 0 0 20px;">
                                 <li>Clone the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3708457664/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 4 - Send Post-Show Emails</a></strong> workflow</li>
-                                <li>Name it: <span id="step10-workflow-name"><em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em></span></li>
+                                <li>Name it: <span id="step11-workflow-name"><em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em></span></li>
                                 <li>Change the Segment membership to the post-show segment from the CSV you uploaded</li>
                             </ul>
                         </span>
@@ -1223,7 +1244,7 @@
         // Load saved progress and event details from localStorage
         window.onload = function() {
             // Load checkboxes
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 11; i++) {
                 const checkbox = document.getElementById('step' + i);
                 const saved = localStorage.getItem('step' + i);
                 if (saved === 'true') {
@@ -1310,7 +1331,7 @@
             };
             
             // Save checkbox states
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 11; i++) {
                 eventData.checkboxes['step' + i] = localStorage.getItem('step' + i) === 'true';
             }
             
@@ -1367,7 +1388,7 @@
             updatePostShowDynamicReferences(eventData.eventKey, eventData.campaignName);
             
             // Load checkbox states
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 11; i++) {
                 const checkbox = document.getElementById('step' + i);
                 const isChecked = eventData.checkboxes['step' + i] || false;
                 checkbox.checked = isChecked;
@@ -1411,7 +1432,7 @@
             localStorage.removeItem('eventKey');
             localStorage.removeItem('campaignName');
             
-            for (let i = 1; i <= 10; i++) {
+            for (let i = 1; i <= 11; i++) {
                 const checkbox = document.getElementById('step' + i);
                 checkbox.checked = false;
                 checkbox.closest('.step').classList.remove('checked');
@@ -1420,6 +1441,8 @@
             
             // Reset dynamic references
             document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step3SegmentName = document.getElementById('step3-segment-name');
+            if (step3SegmentName) step3SegmentName.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step4Naming = document.getElementById('step4-naming-convention');
             if (step4Naming) step4Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step4EventKey = document.getElementById('step4-event-key');
@@ -1434,8 +1457,10 @@
             if (step8Naming) step8Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step9WorkflowName = document.getElementById('step9-workflow-name');
             if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
-            const step10WorkflowName = document.getElementById('step10-workflow-name');
-            if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
+            const step10CampaignReport = document.getElementById('step10-campaign-report');
+            if (step10CampaignReport) step10CampaignReport.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step11WorkflowName = document.getElementById('step11-workflow-name');
+            if (step11WorkflowName) step11WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
             
             updateProgress();
         }
@@ -1507,6 +1532,12 @@
                 step1Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
             
+            // Update Step 3 - Segment Name
+            const step3SegmentName = document.getElementById('step3-segment-name');
+            if (campaignName) {
+                step3SegmentName.innerHTML = createInlineCopy(campaignName, 'Segment Name');
+            }
+            
             // Update Step 4 - Naming Convention and Event Key (Trade Show Record)
             const step4Naming = document.getElementById('step4-naming-convention');
             if (campaignName) {
@@ -1553,12 +1584,18 @@
                 step9WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
             
-            // Update Step 10 - Workflow Clone Name
-            const step10WorkflowName = document.getElementById('step10-workflow-name');
+            // Update Step 10 - Campaign Report Name
+            const step10CampaignReport = document.getElementById('step10-campaign-report');
+            if (campaignName) {
+                step10CampaignReport.innerHTML = createInlineCopy(campaignName, 'Campaign Report Name');
+            }
+            
+            // Update Step 11 - Workflow Clone Name
+            const step11WorkflowName = document.getElementById('step11-workflow-name');
             if (institution) {
                 const eventDate = localStorage.getItem('eventDate');
                 const workflowName = `[TS] - 4 - Send Post-Show Emails - ${eventDate || 'YYYY-MM-DD'} - ${institution}`;
-                step10WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+                step11WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
         }
 
@@ -1698,7 +1735,7 @@
         // Save progress and update UI
         function updateProgress() {
             let completed = 0;
-            const total = 10;
+            const total = 11;
 
             for (let i = 1; i <= total; i++) {
                 const checkbox = document.getElementById('step' + i);
@@ -1730,7 +1767,7 @@
         function resetChecklist() {
             if (confirm('Are you sure you want to reset the checklist? This will uncheck all items and clear event details.')) {
                 // Reset checkboxes
-                for (let i = 1; i <= 10; i++) {
+                for (let i = 1; i <= 11; i++) {
                     const checkbox = document.getElementById('step' + i);
                     checkbox.checked = false;
                     checkbox.closest('.step').classList.remove('checked');
@@ -1752,6 +1789,8 @@
                 
                 // Reset all dynamic references back to placeholders
                 document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+                const step3SegmentName = document.getElementById('step3-segment-name');
+                if (step3SegmentName) step3SegmentName.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
                 const step4Naming = document.getElementById('step4-naming-convention');
                 if (step4Naming) step4Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
                 const step4EventKey = document.getElementById('step4-event-key');
@@ -1766,8 +1805,10 @@
                 if (step8Naming) step8Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
                 const step9WorkflowName = document.getElementById('step9-workflow-name');
                 if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
-                const step10WorkflowName = document.getElementById('step10-workflow-name');
-                if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
+                const step10CampaignReport = document.getElementById('step10-campaign-report');
+                if (step10CampaignReport) step10CampaignReport.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+                const step11WorkflowName = document.getElementById('step11-workflow-name');
+                if (step11WorkflowName) step11WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
                 
                 updateProgress();
             }
@@ -1840,11 +1881,17 @@
                 step9WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
 
-            // Update Step 10 - Workflow Name
-            const step10WorkflowName = document.getElementById('step10-workflow-name');
-            if (step10WorkflowName && institution && eventDate) {
+            // Update Step 10 - Campaign Report Name
+            const step10CampaignReport = document.getElementById('step10-campaign-report');
+            if (step10CampaignReport && campaignName) {
+                step10CampaignReport.innerHTML = createInlineCopy(campaignName, 'Campaign Report Name');
+            }
+
+            // Update Step 11 - Workflow Name
+            const step11WorkflowName = document.getElementById('step11-workflow-name');
+            if (step11WorkflowName && institution && eventDate) {
                 const workflowName = `[TS] - 4 - Send Post-Show Emails - ${eventDate} - ${institution}`;
-                step10WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+                step11WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
         }
     </script>
