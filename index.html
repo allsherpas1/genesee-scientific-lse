@@ -1451,6 +1451,14 @@
             document.getElementById('eventDate').value = '';
             document.getElementById('generatedValuesSection').style.display = 'none';
             
+            // Reset manual entry checkboxes and fields
+            document.getElementById('manualEventKey').checked = false;
+            document.getElementById('manualCampaignName').checked = false;
+            document.getElementById('manualEventKeyInput').style.display = 'none';
+            document.getElementById('manualCampaignNameInput').style.display = 'none';
+            document.getElementById('manualEventKeyField').value = '';
+            document.getElementById('manualCampaignNameField').value = '';
+            
             localStorage.removeItem('eventInstitution');
             localStorage.removeItem('eventDate');
             localStorage.removeItem('eventKey');
@@ -1568,14 +1576,24 @@
                 return;
             }
             
-            if (!institution || !date) {
-                alert('Please fill in both Event Institution and Event Date');
-                return;
+            // If we need to auto-generate anything, we need institution and date
+            if (!isManualKey || !isManualCampaign) {
+                // Check what's missing and provide specific feedback
+                if (!institution && !date) {
+                    alert('Please fill in both Event Institution and Event Date to auto-generate values');
+                    return;
+                } else if (!institution) {
+                    alert('Please fill in Event Institution to auto-generate the Campaign Name');
+                    return;
+                } else if (!date) {
+                    alert('Please fill in Event Date to auto-generate values');
+                    return;
+                }
             }
             
-            // Save inputs
-            localStorage.setItem('eventInstitution', institution);
-            localStorage.setItem('eventDate', date);
+            // Save inputs if provided
+            if (institution) localStorage.setItem('eventInstitution', institution);
+            if (date) localStorage.setItem('eventDate', date);
             
             // Generate or use manual Event Key
             let eventKey;
@@ -1864,53 +1882,10 @@
         }
 
         // Reset all checkboxes
+        // Reset all checkboxes
         function resetChecklist() {
             if (confirm('Are you sure you want to reset the checklist? This will uncheck all items and clear event details.')) {
-                // Reset checkboxes
-                for (let i = 1; i <= 11; i++) {
-                    const checkbox = document.getElementById('step' + i);
-                    checkbox.checked = false;
-                    checkbox.closest('.step').classList.remove('checked');
-                    localStorage.setItem('step' + i, 'false');
-                }
-                
-                // Clear event details
-                document.getElementById('eventInstitution').value = '';
-                document.getElementById('eventDate').value = '';
-                localStorage.removeItem('eventInstitution');
-                localStorage.removeItem('eventDate');
-                localStorage.removeItem('eventKey');
-                localStorage.removeItem('campaignName');
-                
-                // Hide and reset generated values
-                document.getElementById('generatedValuesSection').style.display = 'none';
-                document.getElementById('displayEventKey').textContent = '-';
-                document.getElementById('displayCampaignName').textContent = '-';
-                
-                // Reset all dynamic references back to placeholders
-                document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-                const step3SegmentName = document.getElementById('step3-segment-name');
-                if (step3SegmentName) step3SegmentName.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-                const step4Naming = document.getElementById('step4-naming-convention');
-                if (step4Naming) step4Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-                const step4EventKey = document.getElementById('step4-event-key');
-                if (step4EventKey) step4EventKey.innerHTML = '';
-                const step5EventKey = document.getElementById('step5-event-key');
-                if (step5EventKey) step5EventKey.innerHTML = '';
-                const step6WorkflowName = document.getElementById('step6-workflow-name');
-                if (step6WorkflowName) step6WorkflowName.innerHTML = '<em>[TS] - 2 - Send Pre-Show Emails - [Institution]</em>';
-                const step7Naming = document.getElementById('step7-naming-convention');
-                if (step7Naming) step7Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-                const step8Naming = document.getElementById('step8-naming-convention');
-                if (step8Naming) step8Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-                const step9WorkflowName = document.getElementById('step9-workflow-name');
-                if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
-                const step10CampaignReport = document.getElementById('step10-campaign-report');
-                if (step10CampaignReport) step10CampaignReport.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-                const step11WorkflowName = document.getElementById('step11-workflow-name');
-                if (step11WorkflowName) step11WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
-                
-                updateProgress();
+                clearCurrentEvent();
             }
         }
 
