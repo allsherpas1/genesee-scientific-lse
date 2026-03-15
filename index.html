@@ -764,6 +764,20 @@
             <h3>📋 Generate Values</h3>
             <p class="event-details-intro">Fill in these details and click Generate to create your Event Key and Campaign Name. You can then copy the values into Salesforce and HubSpot where appropriate.</p>
             
+            <div style="background: white; padding: 15px; border-radius: 4px; margin-bottom: 15px; border: 2px solid #8dc63f;">
+                <label style="display: flex; align-items: center; cursor: pointer; font-size: 15px; color: #003d6b;">
+                    <input type="checkbox" id="manualEventKey" onchange="toggleEventKeyMode()" style="width: 18px; height: 18px; margin-right: 10px; cursor: pointer;">
+                    <strong>I already have an Event Key</strong>
+                </label>
+            </div>
+
+            <div style="background: white; padding: 15px; border-radius: 4px; margin-bottom: 15px; border: 2px solid #8dc63f;">
+                <label style="display: flex; align-items: center; cursor: pointer; font-size: 15px; color: #003d6b;">
+                    <input type="checkbox" id="manualCampaignName" onchange="toggleCampaignNameMode()" style="width: 18px; height: 18px; margin-right: 10px; cursor: pointer;">
+                    <strong>I already have a Campaign Name</strong>
+                </label>
+            </div>
+
             <div class="input-group">
                 <label for="eventInstitution">Event Institution</label>
                 <input type="text" id="eventInstitution" placeholder="e.g., Washington University – St. Louis">
@@ -772,6 +786,16 @@
             <div class="input-group">
                 <label for="eventDate">Event Date</label>
                 <input type="date" id="eventDate">
+            </div>
+
+            <div class="input-group" id="manualEventKeyInput" style="display: none;">
+                <label for="manualEventKeyField">Event Key</label>
+                <input type="text" id="manualEventKeyField" placeholder="e.g., lsewashington">
+            </div>
+
+            <div class="input-group" id="manualCampaignNameInput" style="display: none;">
+                <label for="manualCampaignNameField">Campaign Name</label>
+                <input type="text" id="manualCampaignNameField" placeholder="e.g., LSE | 2026-03-15 | Washington University – St. Louis">
             </div>
 
             <button class="reset-button" style="margin-top: 10px; width: auto;" onclick="generateValues()">Generate</button>
@@ -1102,7 +1126,7 @@
                                 <li>Go to the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 3 - Post-show processing</a></strong> workflow</li>
                                 <li>Clone it and name it: <span id="step9-workflow-name"><em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em></span></li>
                                 <li>Update the enrollment trigger to point to the segment you just created</li>
-                                <li>Update the TS Event Key to: <span id="step9-event-key"></span></li>
+                                <li>Click on Step 3 of the workflow to edit it. This is where we set the Event Key to match the Trade Show record. You'll set the <strong>TS Email Event</strong> value to: <span id="step9-event-key"></span></li>
                                 <li>Update the Salesforce Campaign action: Select the correct campaign and confirm Campaign Member Status</li>
                                 <li>Save the workflow</li>
                             </ul>
@@ -1483,10 +1507,66 @@
             arrow.classList.toggle('collapsed');
         }
 
+        // Toggle between auto-generate and manual Event Key entry
+        function toggleEventKeyMode() {
+            const checkbox = document.getElementById('manualEventKey');
+            const manualInput = document.getElementById('manualEventKeyInput');
+            
+            if (checkbox.checked) {
+                manualInput.style.display = 'block';
+            } else {
+                manualInput.style.display = 'none';
+                document.getElementById('manualEventKeyField').value = ''; // Clear manual input when unchecked
+            }
+        }
+
+        // Toggle between auto-generate and manual Campaign Name entry
+        function toggleCampaignNameMode() {
+            const checkbox = document.getElementById('manualCampaignName');
+            const manualInput = document.getElementById('manualCampaignNameInput');
+            
+            if (checkbox.checked) {
+                manualInput.style.display = 'block';
+            } else {
+                manualInput.style.display = 'none';
+                document.getElementById('manualCampaignNameField').value = ''; // Clear manual input when unchecked
+            }
+        }
+
         // Generate event key and campaign name
         function generateValues() {
             const institution = document.getElementById('eventInstitution').value;
             const date = document.getElementById('eventDate').value;
+            const isManualKey = document.getElementById('manualEventKey').checked;
+            const isManualCampaign = document.getElementById('manualCampaignName').checked;
+            
+            // Validate based on which mode is selected
+            if (isManualKey && isManualCampaign) {
+                // Both manual - only need the manual inputs
+                const manualKey = document.getElementById('manualEventKeyField').value.trim().toLowerCase();
+                const manualCampaign = document.getElementById('manualCampaignNameField').value.trim();
+                
+                if (!manualKey || !manualCampaign) {
+                    alert('Please enter both Event Key and Campaign Name');
+                    return;
+                }
+                
+                // Use manual values directly
+                localStorage.setItem('eventKey', manualKey);
+                localStorage.setItem('campaignName', manualCampaign);
+                
+                // Display values
+                document.getElementById('displayEventKey').textContent = manualKey;
+                document.getElementById('displayCampaignName').textContent = manualCampaign;
+                document.getElementById('generatedValuesSection').style.display = 'block';
+                
+                // Update dynamic references
+                updateDynamicReferences(manualKey, manualCampaign);
+                
+                // Auto-save
+                saveCurrentEvent();
+                return;
+            }
             
             if (!institution || !date) {
                 alert('Please fill in both Event Institution and Event Date');
@@ -1497,11 +1577,31 @@
             localStorage.setItem('eventInstitution', institution);
             localStorage.setItem('eventDate', date);
             
-            // Generate Event Key (short lowercase identifier)
-            let eventKey = generateEventKey(institution);
+            // Generate or use manual Event Key
+            let eventKey;
+            if (isManualKey) {
+                eventKey = document.getElementById('manualEventKeyField').value.trim().toLowerCase();
+                if (!eventKey) {
+                    alert('Please enter an Event Key');
+                    return;
+                }
+            } else {
+                // Auto-generate Event Key (short lowercase identifier)
+                eventKey = generateEventKey(institution);
+            }
             
-            // Generate Campaign Name (LSE | YYYY-MM-DD | Institution)
-            let campaignName = `LSE | ${date} | ${institution}`;
+            // Generate or use manual Campaign Name
+            let campaignName;
+            if (isManualCampaign) {
+                campaignName = document.getElementById('manualCampaignNameField').value.trim();
+                if (!campaignName) {
+                    alert('Please enter a Campaign Name');
+                    return;
+                }
+            } else {
+                // Auto-generate Campaign Name (LSE | YYYY-MM-DD | Institution)
+                campaignName = `LSE | ${date} | ${institution}`;
+            }
             
             // Save generated values
             localStorage.setItem('eventKey', eventKey);
@@ -1816,7 +1916,7 @@
 
         // Auto-update version display with current month/year
         (function() {
-            const version = 'v5.2';
+            const version = 'v5.3';
             const now = new Date();
             const monthNames = ["January", "February", "March", "April", "May", "June",
                 "July", "August", "September", "October", "November", "December"];
