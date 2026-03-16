@@ -713,6 +713,268 @@
                 This document describes the process to send pre-show outreach emails to a targeted audience, linking the event to the correct sales rep, and for show follow up, associates the final attendance list with a Salesforce campaign, and sends the post-show emails.
             </p>
             
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #8dc63f;">
+                <div class="collapsible-section-header" onclick="toggleCollapsible('process-viz')" style="margin-top: 0; border-radius: 4px;">
+                    <h3 style="color: #003d6b; font-size: 16px; margin: 0;">📊 Process Visualization</h3>
+                    <span class="collapsible-arrow collapsed" id="collapsible-arrow-process-viz">▼</span>
+                </div>
+                <div class="collapsible-content collapsed" id="collapsible-content-process-viz" style="background: white; border-radius: 0 0 4px 4px; padding: 20px;">
+                    
+                    <!-- PRE-SHOW SECTION -->
+                    <div style="background: linear-gradient(to right, #e8f5e9, #f0f8ff); border: 3px solid #8dc63f; border-radius: 8px; padding: 25px; margin-bottom: 30px;">
+                        <h4 style="color: #003d6b; margin: 0 0 20px 0; font-size: 20px; text-align: center; border-bottom: 3px solid #8dc63f; padding-bottom: 15px;">
+                            PRE-SHOW PROCESS <span style="font-size: 14px; font-weight: normal; color: #64748b;">(Weeks Before Event)</span>
+                        </h4>
+                        
+                        <!-- Phases 1-3 Overview -->
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px;">
+                            <div style="background: white; border: 2px solid #2196f3; border-radius: 6px; padding: 15px; text-align: center;">
+                                <strong style="color: #003d6b; display: block; margin-bottom: 8px;">Phase 1: Setup</strong>
+                                <div style="font-size: 13px; color: #64748b;">Salesforce Campaign<br>Master Account<br>HubSpot Segment</div>
+                            </div>
+                            <div style="background: white; border: 2px solid #2196f3; border-radius: 6px; padding: 15px; text-align: center;">
+                                <strong style="color: #003d6b; display: block; margin-bottom: 8px;">Phase 2: Configure</strong>
+                                <div style="font-size: 13px; color: #64748b;">Trade Show Record<br>Event Key<br>Run Workflow</div>
+                            </div>
+                            <div style="background: white; border: 2px solid #2196f3; border-radius: 6px; padding: 15px; text-align: center;">
+                                <strong style="color: #003d6b; display: block; margin-bottom: 8px;">Phase 3: Send Email</strong>
+                                <div style="font-size: 13px; color: #64748b;">Clone Workflow<br>Send Pre-Show Emails</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Transfer Visualization -->
+                        <div style="background: white; border: 2px solid #ffc107; border-radius: 6px; padding: 20px;">
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <strong style="color: #856404; font-size: 16px;">📋 Workflow: [TS] - 1 - Set Event Key + Populate Email Fields</strong>
+                            </div>
+                            
+                            <!-- Step 1: Trade Show to Contact -->
+                            <div style="background: #e3f2fd; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                                <strong style="color: #0d47a1; font-size: 14px;">Step 1: Match Trade Show Record via Event Key</strong>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 20px; align-items: center; margin-bottom: 25px;">
+                                <!-- Trade Show Record -->
+                                <div style="background: #f8f9fa; border: 2px solid #003d6b; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #003d6b; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Trade Show Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f; font-weight: bold;">Event Key</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f;">Event Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f;">Date</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f;">Time</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f;">Location</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f; font-weight: bold;">Sales Rep Email</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Arrows -->
+                                <div style="text-align: center;">
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                </div>
+                                
+                                <!-- Contact Record -->
+                                <div style="background: #f8f9fa; border: 2px solid #003d6b; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #003d6b; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Contact Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3; font-weight: bold;">TS Email Event</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Event Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Date</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Time</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Location</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3; font-weight: bold;">TS SR Email</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Sales Rep Lookup -->
+                            <div style="background: #f3e5f5; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                                <strong style="color: #4a148c; font-size: 14px;">Step 2: Lookup Sales Rep Record via TS SR Email</strong>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 20px; align-items: center;">
+                                <!-- Sales Rep Record -->
+                                <div style="background: #f8f9fa; border: 2px solid #9c27b0; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #9c27b0; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Sales Rep Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0; font-weight: bold;">Email (lookup key)</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">First Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">Last Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">Phone</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">Image URL</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Arrows -->
+                                <div style="text-align: center;">
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                </div>
+                                
+                                <!-- Contact Record - Rep Fields -->
+                                <div style="background: #f8f9fa; border: 2px solid #003d6b; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #003d6b; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Contact Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3; opacity: 0.4;">TS SR Email (used for lookup)</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep First Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep Last Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep Phone</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep Headshot URL</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- EVENT DIVIDER -->
+                    <div style="text-align: center; margin: 30px 0;">
+                        <div style="background: linear-gradient(135deg, #003d6b 0%, #005a9c 100%); color: white; padding: 20px 40px; border-radius: 8px; display: inline-block; font-weight: bold; font-size: 18px;">
+                            ⭐ EVENT HAPPENS → Attendee List Generated ⭐
+                        </div>
+                    </div>
+                    
+                    <!-- POST-SHOW SECTION -->
+                    <div style="background: linear-gradient(to right, #f0f8ff, #e8f5e9); border: 3px solid #8dc63f; border-radius: 8px; padding: 25px;">
+                        <h4 style="color: #003d6b; margin: 0 0 20px 0; font-size: 20px; text-align: center; border-bottom: 3px solid #8dc63f; padding-bottom: 15px;">
+                            POST-SHOW PROCESS <span style="font-size: 14px; font-weight: normal; color: #64748b;">(After Event)</span>
+                        </h4>
+                        
+                        <!-- Phases 4 Overview -->
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 25px;">
+                            <div style="background: white; border: 2px solid #9c27b0; border-radius: 6px; padding: 15px; text-align: center;">
+                                <strong style="color: #003d6b; display: block; margin-bottom: 8px;">Step 1: Import</strong>
+                                <div style="font-size: 13px; color: #64748b;">Upload CSV<br>Create Segment</div>
+                            </div>
+                            <div style="background: white; border: 2px solid #9c27b0; border-radius: 6px; padding: 15px; text-align: center;">
+                                <strong style="color: #003d6b; display: block; margin-bottom: 8px;">Step 2: Process</strong>
+                                <div style="font-size: 13px; color: #64748b;">Clone Workflow<br>Set Event Key<br>Sync to SFDC</div>
+                            </div>
+                            <div style="background: white; border: 2px solid #9c27b0; border-radius: 6px; padding: 15px; text-align: center;">
+                                <strong style="color: #003d6b; display: block; margin-bottom: 8px;">Step 3: Report</strong>
+                                <div style="font-size: 13px; color: #64748b;">Clone Report<br>Filter Campaign</div>
+                            </div>
+                            <div style="background: white; border: 2px solid #9c27b0; border-radius: 6px; padding: 15px; text-align: center;">
+                                <strong style="color: #003d6b; display: block; margin-bottom: 8px;">Step 4: Follow-Up</strong>
+                                <div style="font-size: 13px; color: #64748b;">Clone Workflow<br>Send Post-Show Emails</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Data Transfer Visualization -->
+                        <div style="background: white; border: 2px solid #ffc107; border-radius: 6px; padding: 20px;">
+                            <div style="text-align: center; margin-bottom: 15px;">
+                                <strong style="color: #856404; font-size: 16px;">📋 Workflow: [TS] - 3 - Post-Show Processing</strong>
+                            </div>
+                            
+                            <!-- Step 1: Trade Show to Contact -->
+                            <div style="background: #e3f2fd; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                                <strong style="color: #0d47a1; font-size: 14px;">Step 1: Match Trade Show Record via Event Key</strong>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 20px; align-items: center; margin-bottom: 25px;">
+                                <!-- Trade Show Record -->
+                                <div style="background: #f8f9fa; border: 2px solid #003d6b; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #003d6b; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Trade Show Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f; font-weight: bold;">Event Key</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #8dc63f; font-weight: bold;">Sales Rep Email</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Arrows -->
+                                <div style="text-align: center;">
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                    <div style="font-size: 32px; color: #8dc63f; line-height: 1;">→</div>
+                                </div>
+                                
+                                <!-- Contact Record -->
+                                <div style="background: #f8f9fa; border: 2px solid #003d6b; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #003d6b; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Contact Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3; font-weight: bold;">TS Email Event</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3; font-weight: bold;">TS SR Email</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Sales Rep Lookup -->
+                            <div style="background: #f3e5f5; padding: 10px; border-radius: 4px; margin-bottom: 15px;">
+                                <strong style="color: #4a148c; font-size: 14px;">Step 2: Lookup Sales Rep Record via TS SR Email</strong>
+                            </div>
+                            
+                            <div style="display: grid; grid-template-columns: 2fr 1fr 2fr; gap: 20px; align-items: center;">
+                                <!-- Sales Rep Record -->
+                                <div style="background: #f8f9fa; border: 2px solid #9c27b0; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #9c27b0; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Sales Rep Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0; font-weight: bold;">Email (lookup key)</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">First Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">Last Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">Phone</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #9c27b0;">Image URL</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Arrows -->
+                                <div style="text-align: center;">
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                    <div style="font-size: 32px; color: #9c27b0; line-height: 1.2;">→</div>
+                                </div>
+                                
+                                <!-- Contact Record - Rep Fields -->
+                                <div style="background: #f8f9fa; border: 2px solid #003d6b; border-radius: 6px; padding: 15px;">
+                                    <div style="background: #003d6b; color: white; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 12px; font-weight: bold;">
+                                        Contact Record
+                                    </div>
+                                    <div style="font-size: 13px; line-height: 2;">
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3; opacity: 0.4;">TS SR Email (used for lookup)</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep First Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep Last Name</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep Phone</div>
+                                        <div style="padding: 6px; background: white; margin-bottom: 4px; border-radius: 3px; border-left: 3px solid #2196f3;">TS Email Rep Headshot URL</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin-top: 15px; text-align: center; background: #e3f2fd; padding: 12px; border-radius: 4px; font-size: 13px; color: #0d47a1;">
+                                <strong>Plus:</strong> Contact is added to Salesforce Campaign with "Attended" status
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #e3f2fd; border-left: 4px solid #2196f3; padding: 15px; border-radius: 4px; margin-top: 20px;">
+                        <strong style="color: #003d6b; display: block; margin-bottom: 8px;">🔑 The Event Key is the Critical Link</strong>
+                        <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.6;">
+                            The <strong>Event Key</strong> (e.g., "lsewashington") acts as the lookup field that connects Contact records to the Trade Show Record. When a workflow sets the "TS Email Event" field on a contact to match the Event Key, HubSpot automatically pulls all the event and sales rep information from the Trade Show Record into the contact's TS Email fields. This enables personalized emails with correct event details and sales rep information.
+                        </p>
+                    </div>
+                    
+                </div>
+            </div>
+            
             <p style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #8dc63f;">
                 <strong>Note:</strong> Need to add a new sales rep record? <a href="#sales-rep-setup" style="color: #0066b2; text-decoration: underline;">See Sales Rep Setup instructions here</a>.
             </p>
