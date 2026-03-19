@@ -692,7 +692,7 @@
     <div class="controls">
         <div class="progress-bar-container">
             <div class="progress-label">
-                Progress: <span id="progress-text">0/11 steps completed</span>
+                Progress: <span id="progress-text">0/12 steps completed</span>
             </div>
             <div class="progress-bar">
                 <div class="progress-fill" id="progress-fill"></div>
@@ -1296,6 +1296,25 @@
                     </label>
                 </div>
             </div>
+            
+            <div class="step" data-step="7">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="step7" onchange="updateProgress()">
+                </div>
+                <div class="step-content">
+                    <label for="step7">
+                        <span class="step-number">Step 7</span>
+                        <span class="step-text">Trade show lead capture form:
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>Send the sales rep for the trade show this link if they don't have it already: <span class="inline-copy-value">https://landing.geneseesci.com/lead-capture-form <button class="inline-copy-button" onclick="copyInline(this, 'https://landing.geneseesci.com/lead-capture-form')">Copy</button></span></li>
+                                <li>Password is: <span class="inline-copy-value">gstradeshows <button class="inline-copy-button" onclick="copyInline(this, 'gstradeshows')">Copy</button></span></li>
+                                <li>The landing page does not need to be copied; it is just a way to get the lead into HubSpot and synced over to Salesforce with notes</li>
+                                <li>When the post-show list arrives, the person will be on it and will be added to the campaign</li>
+                            </ul>
+                        </span>
+                    </label>
+                </div>
+            </div>
             </div>
         </div>
 
@@ -1340,23 +1359,6 @@
                 </div>
             </div>
 
-            <div class="step" data-step="7">
-                <div class="checkbox-wrapper">
-                    <input type="checkbox" id="step7" onchange="updateProgress()">
-                </div>
-                <div class="step-content">
-                    <label for="step7">
-                        <span class="step-number">Step 7</span>
-                        <span class="step-text">Prepare the attendee file:
-                            <ul style="margin: 10px 0 0 20px;">
-                                <li>Rename the file to: <span id="step7-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
-                                <li>Save as CSV</li>
-                            </ul>
-                        </span>
-                    </label>
-                </div>
-            </div>
-
             <div class="step" data-step="8">
                 <div class="checkbox-wrapper">
                     <input type="checkbox" id="step8" onchange="updateProgress()">
@@ -1364,13 +1366,10 @@
                 <div class="step-content">
                     <label for="step8">
                         <span class="step-number">Step 8</span>
-                        <span class="step-text">Upload the attendee file to HubSpot:
+                        <span class="step-text">Prepare the attendee file:
                             <ul style="margin: 10px 0 0 20px;">
-                                <li>Go to Contacts → Import</li>
-                                <li>Upload the CSV and map the required fields</li>
-                                <li>Complete the import</li>
-                                <li>On the final screen, click "Actions" → "Add imported contacts to a segment" (create as a <strong>static segment</strong>)</li>
-                                <li>Name the segment: <span id="step8-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
+                                <li>Rename the file to: <span id="step8-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
+                                <li>Save as CSV</li>
                             </ul>
                         </span>
                     </label>
@@ -1384,14 +1383,13 @@
                 <div class="step-content">
                     <label for="step9">
                         <span class="step-number">Step 9</span>
-                        <span class="step-text">Set up the post-show processing workflow to 1) add contacts to the Salesforce campaign, and 2) populate the list's trade show and sales rep fields with the correct values for the post-show emails:
+                        <span class="step-text">Upload the attendee file to HubSpot:
                             <ul style="margin: 10px 0 0 20px;">
-                                <li>Go to the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 3 - Post-show processing</a></strong> workflow</li>
-                                <li>Clone it and name it: <span id="step9-workflow-name"><em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em></span></li>
-                                <li>Update the enrollment trigger to point to the segment you just created</li>
-                                <li>Click on Step 3 of the workflow to edit it. This is where we set the Event Key to match the Trade Show record. You'll set the <strong>TS Email Event</strong> value to: <span id="step9-event-key"></span></li>
-                                <li>Update the Salesforce Campaign action: Select the correct campaign and confirm Campaign Member Status</li>
-                                <li>Save the workflow</li>
+                                <li>Go to Contacts → Import</li>
+                                <li>Upload the CSV and map the required fields</li>
+                                <li>Complete the import</li>
+                                <li>On the final screen, click "Actions" → "Add imported contacts to a segment" (create as a <strong>static segment</strong>)</li>
+                                <li>Name the segment: <span id="step9-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
                             </ul>
                         </span>
                     </label>
@@ -1405,14 +1403,14 @@
                 <div class="step-content">
                     <label for="step10">
                         <span class="step-number">Step 10</span>
-                        <span class="step-text">Create a Salesforce Campaign Member report:
+                        <span class="step-text">Set up the post-show processing workflow to 1) add contacts to the Salesforce campaign, and 2) populate the list's trade show and sales rep fields with the correct values for the post-show emails:
                             <ul style="margin: 10px 0 0 20px;">
-                                <li>After the post-show processing workflow completes, contacts will sync to the Salesforce campaign</li>
-                                <li>Go to the <a href="https://geneseesci.lightning.force.com/lightning/r/Folder/00lcv000000yJvpAAE/view?queryScope=userFolders" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Campaign Member Reports list</a></li>
-                                <li>Choose the most recent report and clone it</li>
-                                <li>Rename the cloned report to: <span id="step10-campaign-report"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
-                                <li>While editing the report, change the campaign name in the filter to match your campaign</li>
-                                <li>Save and run the report</li>
+                                <li>Go to the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561848530/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 3 - Post-show processing</a></strong> workflow</li>
+                                <li>Clone it and name it: <span id="step10-workflow-name"><em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em></span></li>
+                                <li>Update the enrollment trigger to point to the segment you just created</li>
+                                <li>Click on Step 3 of the workflow to edit it. This is where we set the Event Key to match the Trade Show record. You'll set the <strong>TS Email Event</strong> value to: <span id="step10-event-key"></span></li>
+                                <li>Update the Salesforce Campaign action: Select the correct campaign and confirm Campaign Member Status</li>
+                                <li>Save the workflow</li>
                             </ul>
                         </span>
                     </label>
@@ -1426,10 +1424,31 @@
                 <div class="step-content">
                     <label for="step11">
                         <span class="step-number">Step 11</span>
+                        <span class="step-text">Create a Salesforce Campaign Member report:
+                            <ul style="margin: 10px 0 0 20px;">
+                                <li>After the post-show processing workflow completes, contacts will sync to the Salesforce campaign</li>
+                                <li>Go to the <a href="https://geneseesci.lightning.force.com/lightning/r/Folder/00lcv000000yJvpAAE/view?queryScope=userFolders" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">Campaign Member Reports list</a></li>
+                                <li>Choose the most recent report and clone it</li>
+                                <li>Rename the cloned report to: <span id="step11-campaign-report"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
+                                <li>While editing the report, change the campaign name in the filter to match your campaign</li>
+                                <li>Save and run the report</li>
+                            </ul>
+                        </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="step" data-step="12">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="step12" onchange="updateProgress()">
+                </div>
+                <div class="step-content">
+                    <label for="step12">
+                        <span class="step-number">Step 12</span>
                         <span class="step-text">Set up the post-show email workflow:
                             <ul style="margin: 10px 0 0 20px;">
                                 <li>Clone the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3708457664/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">[TS] - 4 - Send Post-Show Emails</a></strong> workflow</li>
-                                <li>Name it: <span id="step11-workflow-name"><em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em></span></li>
+                                <li>Name it: <span id="step12-workflow-name"><em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em></span></li>
                                 <li>Change the Segment membership to the post-show segment from the CSV you uploaded</li>
                             </ul>
                         </span>
@@ -1531,7 +1550,7 @@
         // Load saved progress and event details from localStorage
         window.onload = function() {
             // Load checkboxes
-            for (let i = 1; i <= 11; i++) {
+            for (let i = 1; i <= 12; i++) {
                 const checkbox = document.getElementById('step' + i);
                 const saved = localStorage.getItem('step' + i);
                 if (saved === 'true') {
@@ -1618,7 +1637,7 @@
             };
             
             // Save checkbox states
-            for (let i = 1; i <= 11; i++) {
+            for (let i = 1; i <= 12; i++) {
                 eventData.checkboxes['step' + i] = localStorage.getItem('step' + i) === 'true';
             }
             
@@ -1675,7 +1694,7 @@
             updatePostShowDynamicReferences(eventData.eventKey, eventData.campaignName);
             
             // Load checkbox states
-            for (let i = 1; i <= 11; i++) {
+            for (let i = 1; i <= 12; i++) {
                 const checkbox = document.getElementById('step' + i);
                 const isChecked = eventData.checkboxes['step' + i] || false;
                 checkbox.checked = isChecked;
@@ -1727,7 +1746,7 @@
             localStorage.removeItem('eventKey');
             localStorage.removeItem('campaignName');
             
-            for (let i = 1; i <= 11; i++) {
+            for (let i = 1; i <= 12; i++) {
                 const checkbox = document.getElementById('step' + i);
                 checkbox.checked = false;
                 checkbox.closest('.step').classList.remove('checked');
@@ -1746,16 +1765,18 @@
             if (step5EventKey) step5EventKey.innerHTML = '';
             const step6WorkflowName = document.getElementById('step6-workflow-name');
             if (step6WorkflowName) step6WorkflowName.innerHTML = '<em>[TS] - 2 - Send Pre-Show Emails - [Institution]</em>';
-            const step7Naming = document.getElementById('step7-naming-convention');
-            if (step7Naming) step7Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step8Naming = document.getElementById('step8-naming-convention');
             if (step8Naming) step8Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-            const step9WorkflowName = document.getElementById('step9-workflow-name');
-            if (step9WorkflowName) step9WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
-            const step10CampaignReport = document.getElementById('step10-campaign-report');
-            if (step10CampaignReport) step10CampaignReport.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
-            const step11WorkflowName = document.getElementById('step11-workflow-name');
-            if (step11WorkflowName) step11WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
+            const step9Naming = document.getElementById('step9-naming-convention');
+            if (step9Naming) step9Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step10EventKey = document.getElementById('step10-event-key');
+            if (step10EventKey) step10EventKey.innerHTML = '';
+            const step10WorkflowName = document.getElementById('step10-workflow-name');
+            if (step10WorkflowName) step10WorkflowName.innerHTML = '<em>[TS] - 3 - Post-Show Processing - YYYY-MM-DD - [Institution]</em>';
+            const step11CampaignReport = document.getElementById('step11-campaign-report');
+            if (step11CampaignReport) step11CampaignReport.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            const step12WorkflowName = document.getElementById('step12-workflow-name');
+            if (step12WorkflowName) step12WorkflowName.innerHTML = '<em>[TS] - 4 - Send Post-Show Emails - YYYY-MM-DD - [Institution]</em>';
             
             updateProgress();
         }
@@ -2116,7 +2137,7 @@
         // Save progress and update UI
         function updateProgress() {
             let completed = 0;
-            const total = 11;
+            const total = 12;
 
             for (let i = 1; i <= total; i++) {
                 const checkbox = document.getElementById('step' + i);
@@ -2194,42 +2215,42 @@
             const institution = parts.length > 2 ? parts[2].trim() : '';
             const eventDate = parts.length > 1 ? parts[1].trim() : '';
 
-            // Update Step 7 - Campaign Name
-            const step7Naming = document.getElementById('step7-naming-convention');
-            if (step7Naming && campaignName) {
-                step7Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
-            }
-
-            // Update Step 8 - Campaign Name
+            // Update Step 8 - Campaign Name (prepare attendee file)
             const step8Naming = document.getElementById('step8-naming-convention');
             if (step8Naming && campaignName) {
                 step8Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
 
-            // Update Step 9 - Event Key
-            const step9EventKey = document.getElementById('step9-event-key');
-            if (step9EventKey && eventKey) {
-                step9EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
+            // Update Step 9 - Campaign Name (upload segment)
+            const step9Naming = document.getElementById('step9-naming-convention');
+            if (step9Naming && campaignName) {
+                step9Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
 
-            // Update Step 9 - Workflow Name
-            const step9WorkflowName = document.getElementById('step9-workflow-name');
-            if (step9WorkflowName && institution && eventDate) {
+            // Update Step 10 - Event Key
+            const step10EventKey = document.getElementById('step10-event-key');
+            if (step10EventKey && eventKey) {
+                step10EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
+            }
+
+            // Update Step 10 - Workflow Name
+            const step10WorkflowName = document.getElementById('step10-workflow-name');
+            if (step10WorkflowName && institution && eventDate) {
                 const workflowName = `[TS] - 3 - Post-Show Processing - ${eventDate} - ${institution}`;
-                step9WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+                step10WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
 
-            // Update Step 10 - Campaign Report Name
-            const step10CampaignReport = document.getElementById('step10-campaign-report');
-            if (step10CampaignReport && campaignName) {
-                step10CampaignReport.innerHTML = createInlineCopy(campaignName, 'Campaign Report Name');
+            // Update Step 11 - Campaign Report Name
+            const step11CampaignReport = document.getElementById('step11-campaign-report');
+            if (step11CampaignReport && campaignName) {
+                step11CampaignReport.innerHTML = createInlineCopy(campaignName, 'Campaign Report Name');
             }
 
-            // Update Step 11 - Workflow Name
-            const step11WorkflowName = document.getElementById('step11-workflow-name');
-            if (step11WorkflowName && institution && eventDate) {
+            // Update Step 12 - Workflow Name
+            const step12WorkflowName = document.getElementById('step12-workflow-name');
+            if (step12WorkflowName && institution && eventDate) {
                 const workflowName = `[TS] - 4 - Send Post-Show Emails - ${eventDate} - ${institution}`;
-                step11WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
+                step12WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
         }
     </script>
