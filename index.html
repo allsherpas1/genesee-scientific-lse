@@ -1128,7 +1128,7 @@
                         <span class="step-text">In HubSpot, <a href="https://app-na2.hubspot.com/contacts/242844030/objectLists/177/filters" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">clone the LSE Pre-Show List – TEMPLATE segment here</a>:
                             <ul style="margin: 10px 0 0 20px;">
                                 <li>Change the filter for <strong>Master Account Code - Lab Level</strong> to the <strong>Master Account Code</strong> you found in Salesforce</li>
-                                <li>Save the segment as: <span id="step3-segment-name"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
+                                <li>Save the segment as: <span id="step3-segment-name"><em>LSE | Pre-Show | YYYY-MM-DD | Institution – Location</em></span></li>
                                 <li><strong>When done,</strong> convert the Segment to a static list (this prevents new contacts from matching the criteria after you add trade show information)</li>
                             </ul>
                         </span>
@@ -1389,7 +1389,7 @@
                                 <li>Upload the CSV and map the required fields</li>
                                 <li>Complete the import</li>
                                 <li>On the final screen, click "Actions" → "Add imported contacts to a segment" (create as a <strong>static segment</strong>)</li>
-                                <li>Name the segment: <span id="step9-naming-convention"><em>LSE | YYYY-MM-DD | Institution – Location</em></span></li>
+                                <li>Name the segment: <span id="step9-naming-convention"><em>LSE | Post-Show | YYYY-MM-DD | Institution – Location</em></span></li>
                             </ul>
                         </span>
                     </label>
@@ -1756,7 +1756,7 @@
             // Reset dynamic references
             document.getElementById('step1-naming-convention').innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step3SegmentName = document.getElementById('step3-segment-name');
-            if (step3SegmentName) step3SegmentName.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            if (step3SegmentName) step3SegmentName.innerHTML = '<em>LSE | Pre-Show | YYYY-MM-DD | Institution – Location</em>';
             const step4Naming = document.getElementById('step4-naming-convention');
             if (step4Naming) step4Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step4EventKey = document.getElementById('step4-event-key');
@@ -1768,7 +1768,7 @@
             const step8Naming = document.getElementById('step8-naming-convention');
             if (step8Naming) step8Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
             const step9Naming = document.getElementById('step9-naming-convention');
-            if (step9Naming) step9Naming.innerHTML = '<em>LSE | YYYY-MM-DD | Institution – Location</em>';
+            if (step9Naming) step9Naming.innerHTML = '<em>LSE | Post-Show | YYYY-MM-DD | Institution – Location</em>';
             const step10EventKey = document.getElementById('step10-event-key');
             if (step10EventKey) step10EventKey.innerHTML = '';
             const step10WorkflowName = document.getElementById('step10-workflow-name');
@@ -1934,10 +1934,12 @@
                 step1Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
             
-            // Update Step 3 - Segment Name
+            // Update Step 3 - Segment Name (with Pre-Show)
             const step3SegmentName = document.getElementById('step3-segment-name');
             if (campaignName) {
-                step3SegmentName.innerHTML = createInlineCopy(campaignName, 'Segment Name');
+                // Insert "Pre-Show | " after "LSE | "
+                const preShowSegmentName = campaignName.replace('LSE | ', 'LSE | Pre-Show | ');
+                step3SegmentName.innerHTML = createInlineCopy(preShowSegmentName, 'Segment Name');
             }
             
             // Update Step 4 - Naming Convention and Event Key (Trade Show Record)
@@ -2221,10 +2223,12 @@
                 step8Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
             }
 
-            // Update Step 9 - Campaign Name (upload segment)
+            // Update Step 9 - Segment Name (upload segment with Post-Show)
             const step9Naming = document.getElementById('step9-naming-convention');
             if (step9Naming && campaignName) {
-                step9Naming.innerHTML = createInlineCopy(campaignName, 'Campaign Name');
+                // Insert "Post-Show | " after "LSE | "
+                const postShowSegmentName = campaignName.replace('LSE | ', 'LSE | Post-Show | ');
+                step9Naming.innerHTML = createInlineCopy(postShowSegmentName, 'Campaign Name');
             }
 
             // Update Step 10 - Event Key
