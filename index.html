@@ -1259,7 +1259,7 @@
                         <span class="step-text">Clone the <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3897587392/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong> workflow:
                             <ul style="margin: 10px 0 0 20px;">
                                 <li>Open the workflow</li>
-                                <li>Clone it and name it appropriately for this event</li>
+                                <li>Clone it and name it: <span id="step5-workflow-name"><em>[TS] - 1 - Set Event Key - [Campaign Name]</em></span></li>
                                 <li>Update the segment enrollment to your LSE Pre-Show segment</li>
                                 <li>Set the <strong>Event Key</strong> to <span id="step5-event-key"></span></li>
                                 <li>Turn the workflow <strong>ON</strong> and choose "Yes" to enroll contacts who meet enrollment criteria</li>
@@ -1763,6 +1763,8 @@
             if (step4EventKey) step4EventKey.innerHTML = '';
             const step5EventKey = document.getElementById('step5-event-key');
             if (step5EventKey) step5EventKey.innerHTML = '';
+            const step5WorkflowName = document.getElementById('step5-workflow-name');
+            if (step5WorkflowName) step5WorkflowName.innerHTML = '<em>[TS] - 1 - Set Event Key - [Campaign Name]</em>';
             const step6WorkflowName = document.getElementById('step6-workflow-name');
             if (step6WorkflowName) step6WorkflowName.innerHTML = '<em>[TS] - 2 - Send Pre-Show Emails - [Institution]</em>';
             const step8Naming = document.getElementById('step8-naming-convention');
@@ -1958,6 +1960,13 @@
             const step5EventKey = document.getElementById('step5-event-key');
             if (eventKey) {
                 step5EventKey.innerHTML = createInlineCopy(eventKey, 'Event Key');
+            }
+            
+            // Update Step 5 - Workflow Name
+            const step5WorkflowName = document.getElementById('step5-workflow-name');
+            if (campaignName) {
+                const workflowName = `[TS] - 1 - Set Event Key - ${campaignName}`;
+                step5WorkflowName.innerHTML = createInlineCopy(workflowName, 'Workflow Name');
             }
             
             // Update Step 6 - Workflow Clone Name
@@ -2188,8 +2197,8 @@
 
         // Update post-show values
         function updatePostShowValues() {
-            const eventKey = document.getElementById('postShowEventKey').value;
-            const campaignName = document.getElementById('postShowCampaignName').value;
+            const eventKey = document.getElementById('postShowEventKey').value.trim();
+            const campaignName = document.getElementById('postShowCampaignName').value.trim();
 
             if (!eventKey || !campaignName) {
                 alert('Please fill in both Event Key and Campaign Name');
