@@ -700,7 +700,7 @@
     <div class="container">
         <header>
             <h1>LSE Trade Show Process</h1>
-            <p class="subtitle">V5.4 - June 2026</p>
+            <p class="subtitle">V5 - February 2026</p>
         </header>
 
         <div class="overview">
@@ -755,9 +755,6 @@
 
             <h3>📋 Generate Values</h3>
             <p class="event-details-intro">Fill in these details and click Generate to create your Event Key and Campaign Name. You can then copy the values into Salesforce and HubSpot where appropriate.</p>
-            <div class="naming-convention" style="margin-bottom: 15px;">
-                <strong>Event Key format:</strong> <code>lse</code> + <code>YYYYMMDD</code> + institution slug &nbsp;—&nbsp; e.g. <code>lse20260314washu</code>. The date is embedded so keys are always unique even if the same institution hosts multiple events.
-            </div>
             
             <div class="input-group">
                 <label for="eventInstitution">Event Institution</label>
@@ -945,7 +942,7 @@
                 <div class="step-content">
                     <label for="step5">
                         <span class="step-number">Step 5</span>
-                        <span class="step-text">Open the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3561133754/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong>. Update the segment enrollment and set the <strong>Event Key</strong> to <span id="step5-event-key"></span>. Turn the workflow <strong>ON</strong> to run it, then turn it <strong>OFF</strong> after completion. This prepares contact records for email.</span>
+                        <span class="step-text">Open the workflow <strong><a href="https://app-na2.hubspot.com/workflows/242844030/platform/flow/3897587392/edit" target="_blank" rel="noopener noreferrer" style="color: #0066b2; text-decoration: underline;">'[TS] – 1 – Set Event Key + Populate Email Fields'</a></strong>. Update the segment enrollment and set the <strong>Event Key</strong> to <span id="step5-event-key"></span>. Turn the workflow <strong>ON</strong> to run it, then turn it <strong>OFF</strong> after completion. This prepares contact records for email.</span>
                     </label>
                 </div>
             </div>
@@ -1296,35 +1293,12 @@
             localStorage.setItem('eventInstitution', institution);
             localStorage.setItem('eventDate', date);
             
-            // Generate Event Key — includes date slug for guaranteed uniqueness
-            // Format: lse + YYYYMMDD + institutionslug  e.g. lse20260314washu
-            let eventKey = generateEventKey(institution, date);
+            // Generate Event Key (short lowercase identifier)
+            let eventKey = generateEventKey(institution);
             
             // Generate Campaign Name (LSE | YYYY-MM-DD | Institution)
             let campaignName = `LSE | ${date} | ${institution}`;
             
-            // --- Collision check ---
-            // Look through all saved events for a matching key that isn't the current session
-            const allEvents = getAllSavedEvents();
-            const currentSessionKey = localStorage.getItem('eventKey'); // key before this generation
-            const collision = Object.entries(allEvents).find(([k, v]) => {
-                return v.eventKey === eventKey && k !== currentSessionKey;
-            });
-
-            if (collision) {
-                const [, collidingEvent] = collision;
-                const proceed = confirm(
-                    `⚠️ Duplicate Event Key Detected!\n\n` +
-                    `The key "${eventKey}" already exists for:\n` +
-                    `  • ${collidingEvent.campaignName || collidingEvent.eventKey} (${collidingEvent.date || 'no date'})\n\n` +
-                    `This should not happen — each event key must be unique in HubSpot.\n\n` +
-                    `Check that your institution name and date are correct before proceeding.\n\n` +
-                    `Click OK to use this key anyway, or Cancel to go back and correct the details.`
-                );
-                if (!proceed) return;
-            }
-            // --- End collision check ---
-
             // Save generated values
             localStorage.setItem('eventKey', eventKey);
             localStorage.setItem('campaignName', campaignName);
@@ -1435,14 +1409,14 @@
             document.body.removeChild(textarea);
         }
 
-        // Generate short event key from institution name + date
-        function generateEventKey(institution, date) {
+        // Generate short event key from institution name
+        function generateEventKey(institution) {
             if (!institution) return '';
             
             // Convert to lowercase and remove special characters except spaces and dashes
             let cleaned = institution.toLowerCase().replace(/[^a-z\s-]/g, '');
             
-            // Remove location part (after dash or em-dash)
+            // Remove location part (after dash)
             if (cleaned.includes(' – ') || cleaned.includes(' - ')) {
                 cleaned = cleaned.split(/\s*[-–]\s*/)[0];
             }
@@ -1458,19 +1432,12 @@
             if (meaningfulWords.length === 0) {
                 meaningfulWords = words.filter(w => w !== 'university');
             }
-
-            // Build institution slug from meaningful words
-            const institutionSlug = meaningfulWords.join('');
-
-            // Build date slug: YYYYMMDD from YYYY-MM-DD input
-            let dateSlug = '';
-            if (date) {
-                dateSlug = date.replace(/-/g, '');
-            }
             
-            // Final key: lse + YYYYMMDD + institutionslug
-            // e.g. lse20260314washu  — date first so keys sort chronologically
-            let key = 'lse' + dateSlug + institutionSlug;
+            // Take the most distinctive word (usually the first meaningful word)
+            // For "University of Michigan" → "michigan"
+            // For "Washington University" → "washington"
+            // For "UC Berkeley" → "uc berkeley" → "ucberkeley"
+            let key = 'lse' + meaningfulWords.join('');
             
             return key;
         }
